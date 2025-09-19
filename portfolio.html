@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mark — Full-Stack Web Developer Portfolio</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* Gruvbox-dark inspired color palette */
+    :root{
+      --bg:#1d2021; /* dark */
+      --panel:#282828; /* card */
+      --muted:#a89984; /* text */
+      --accent:#fe8019; /* orange */
+      --accent-2:#b8bb26; /* green */
+      --glass: rgba(255,255,255,0.03);
+    }
+    html,body{height:100%;background:var(--bg);color:#ebdbb2;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    a{color:var(--accent)}
+    .container-xl{padding-top:3rem;padding-bottom:4rem}
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent), url('') center/cover no-repeat;
+      border-radius:12px;padding:2rem;border:1px solid rgba(255,255,255,0.03);
+    }
+    .brand-square{width:162px;height:162px;border-radius:12px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .muted{color:var(--muted)}
+    .card-panel{background:var(--panel);border:1px solid rgba(255,255,255,0.04);border-radius:12px}
+    .usp{border-left:4px solid var(--accent);padding:1rem;background:linear-gradient(90deg, rgba(255,128,0,0.03), transparent)}
+    .skill-pill{border-radius:999px;padding:0.35rem 0.75rem;border:1px solid rgba(255,255,255,0.03);display:inline-block;margin:0.25rem}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#1b1b1b;font-weight:700}
+    footer{opacity:0.9;padding-top:2rem;padding-bottom:2rem}
+    /* projects grid */
+    .project-img{height:180px;background:#2b2b2b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+    /* small tweaks */
+    .nav-link{color:#d5c4a1}
+    .nav-link.active{color:var(--accent)}
+    @media (max-width:576px){.brand-square{width:64px;height:64px}}
+    .form-control::placeholder,textarea::placeholder {
+	    color: rgba(255, 255, 255, 0.5);
+	    opacity: 1; 
+	  }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-4">
+  <div class="container-lg">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <div class="brand-square me-3">
+	      <img class = "brand-square object-fit-cover "src="./assets/img/MA1.jpg" alt="avatar">
+      </div>
+      <div>
+        <div style="font-weight:700">Mark</div>
+        <div class="muted small">Full-Stack Web Developer</div>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+	<!---        <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li> -->
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container-xl">
+  <!-- HERO / COVER -->
+  <section class="hero mb-4 p-4 card-panel">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1 class="display-6">Hi, I’m Mark — I turn ideas into working websites quickly.</h1>
+        <p class="lead muted">I build maintainable, extendable web apps using .NET, sql server, Bootstrap, HTML/CSS, jQuery, and modern workflows. For startups and small teams I deliver fast, reliable MVPs that scale.</p>
+
+        <div class="d-flex gap-2 mt-3">
+          <a class="btn cta" href="#contact">Hire me — 6-week freelance packages</a>
+          <a class="btn btn-outline-light" href="#projects">View projects</a>
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <div class="card-panel p-3 d-inline-block text-start" style="min-width:220px">
+		<!--<div style="font-size:.9rem;color:var(--muted)">Unique Selling Point</div> -->
+          <div class="fw-bold">Prototype at every stage + fast iteration</div>
+          <div class="muted small mt-2">I provide working prototypes throughout development so clients can test & give feedback early — this keeps scope tight and reduces rework.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="mb-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card-panel p-4 my-3">
+          <h2>About</h2>
+          <p class="muted">I’m a practical web developer focused on building MVPs and small products. I combine clean UI with solid front-end engineering: Bootstrap, custom CSS, and jQuery where it makes sense. My goals are speed, reliability, and a codebase your team can pick up later.</p>
+
+          <p>I value clear communication and visible progress — you’ll get a prototype in each stage. Outside work I tinker with UI patterns and open-source components.</p>
+
+          <div class="usp mt-3">
+            <strong>Who I help:</strong> Startups and small teams that need production-ready MVPs fast.
+            <br>
+            <strong>Promise:</strong> Deliver a tested prototype each sprint so you can validate before investing more.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-3">
+        <div class="card-panel p-3">
+          <h5 class="mb-2">Quick facts</h5>
+          <ul class="muted small">
+            <li>Primary stack: .Net, sql server,  HTML, CSS (Bootstrap), jQuery</li>
+            <li>Service style: Rapid MVPs, iterative prototyping</li>
+            <li>Location: Remote-friendly</li>
+          </ul>
+
+	  <!--        <h6 class="mt-3">Education</h6>
+          <div class="muted small">Relevant degree or certifications (add your degree/cert here to strengthen credibility).</div>
+	  -->
+	  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP and Services -->
+  <section id="services" class="mb-4">
+    <div class="card-panel p-4">
+      <h3>Services — 6-Week Freelance Track</h3>
+      <p class="muted">Each package is optimized for a 6-week delivery window. Pick the one that matches your stage.</p>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 card-panel h-100">
+            <h5>Launch MVP (6 weeks)</h5>
+            <p class="muted small">Rapid product launch: design → prototype → working site with basic auth and CRUD for all endpoints.</p>
+            <ul class="muted small">
+              <li>Bootstrap-based responsive UI</li>
+              <li>Prototype each sprint</li>
+              <li>1 CRUD endpoint + integration</li>
+            </ul>
+            <div class="mt-3"><a class="btn btn-sm btn-outline-light" href="#contact">Start this package</a></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 card-panel h-100">
+            <h5>Prototype & Validate (4–6 weeks)</h5>
+            <p class="muted small">Interactive prototypes, user testing flows, and prioritized backlog for next phases.</p>
+            <div class="mt-3"><a class="btn btn-sm btn-outline-light" href="#contact">Request prototype</a></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 card-panel h-100">
+            <h5>Design + UI polish</h5>
+            <p class="muted small">Bootstrap theming, responsive fixes, accessibility checks, and performance tuning.</p>
+            <div class="mt-3"><a class="btn btn-sm btn-outline-light" href="#contact">Book a consultation</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 small muted">Note: Each package includes a fixed number of edits and 30 days of after-launch support. Mentioned details are negotiable—we tailor to your needs.</div>
+    </div>
+  </section>
+
+  <!-- Skills & Tools -->
+  <section class="mb-5 row">
+    <div class="col-md">
+      <div class="card-panel p-3 mb-4">
+        <h5>Skills</h5>
+        <div class="mt-2">
+          <span class="skill-pill">.NET</span>
+          <span class="skill-pill">Bootstrap</span>
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">jQuery</span>
+          <span class="skill-pill">Responsive design</span>
+          <span class="skill-pill">Prototyping</span>
+          <span class="skill-pill">Accessibility</span>
+        </div>
+      </div>
+    </div>
+    <!---- <div class="col-md-6">
+      <div class="card-panel p-3">
+        <h5>Tools & Workflow</h5>
+        <div class="muted small mt-2">Git · GitHub · npm · build tools · simple component design · iterative sprints · client demos</div>
+      </div>
+    </div>*/
+    </section>->
+
+  <!-- Projects -->
+  <section id="projects" class="mb-4">
+    <h3 class="mb-3">Selected Projects</h3>
+    <div class="row g-3">
+      <!-- project card -->
+      <div class="col-md-6">
+        <div class="card-panel p-3 h-100">
+          <h5>APIs for a Minisocial app</h5>
+          <div class="muted small">Built an MVP landing site with an admin panel and CRUD for users. Delivered a working prototype each sprint.</div>
+          <div class="mt-3 d-flex justify-content-between align-items-center">
+		  <a class="btn btn-sm btn-outline-light" href="https://github.com/msqjr/MINISOcIaL">View project</a>
+		  <i class="fa-brands fa-java fa-2xl pe-2"></i>
+			
+	  </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card-panel p-3 h-100">
+          <h5>E-commerce Prototype</h5>
+          <div class="muted small">A lightweight store front with product CRUD, search and responsive UI using Bootstrap and simple JS enhancements.</div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4">
+        <div class="card-panel p-3 h-100">
+          <h5>Internal Dashboard</h5>
+          <div class="muted small">Dashboard with DataTables, charts, and export features for a small team — emphasis on UX and clarity.</div>
+          <div class="mt-3"><a class="btn btn-sm btn-outline-light" href="#">View project</a></div>
+        </div>
+      </div>
+    </div>
+      -->
+    <!--
+  </section>
+
+  <!-- Achievements & Testimonials -->
+  <!---
+  <section class="mb-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card-panel p-3 my-3">
+          <h5>Achievements</h5>
+          <ul class="muted small">
+            <li>No public awards yet — add any recognitions or course certificates here.</li>
+            <li>Completed multiple small- to medium-size MVPs for startups.</li>
+          </ul>
+        </div>
+      </div>
+      -->
+      <!---
+      <div class="col-md-12" id="testimonials">
+        <div class="card-panel p-3 my-3">
+          <h5>Testimonials</h5>
+          <div id="testiCarousel" class="carousel slide px-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <blockquote class="blockquote mb-0">
+                  <p>"Mark delivered a working prototype every week. Communication was excellent and the final product launched on time."</p>
+                  <footer class="blockquote-footer">Client A <span class="muted">— CEO, Startup</span></footer>
+                </blockquote>
+              </div>
+              <div class="carousel-item">
+                <blockquote class="blockquote mb-0">
+                  <p>"Fast, clear, and reliable. Saved us weeks of development with focused MVP work."</p>
+                  <footer class="blockquote-footer">Client B <span class="muted">— Product Manager</span></footer>
+                </blockquote>
+              </div>
+            </div>
+	            <button class="carousel-control-prev " type="button" data-bs-target="#testiCarousel" data-bs-slide="prev" style="left: -5rem"><span class="carousel-control-prev-icon"></span></button>
+		    <button class="carousel-control-next " type="button" data-bs-target="#testiCarousel" data-bs-slide="next" style="right: -5rem"><span class="carousel-control-next-icon"></span></button>
+          </div>
+        </div>
+      </div>
+      </div>
+     
+  </section>
+      --> 
+
+  <!-- CTA & Contact -->
+  <section id="contact" class="card-panel p-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 py-3">
+        <h4>Ready to start your 6-week project?</h4>
+        <p class="muted">Tell me about your idea and I’ll respond with a tailored plan and a proposed timeline (6-week sprint structure).</p>
+        <a class="btn cta" href="mailto:markmounirr@gmail.com?subject=New%20project%20inquiry">Email me</a>
+        <a class="btn btn-outline-light ms-2" href="assets/resume.pdf">Download resume</a>
+      </div>
+      <div class="col-md-6">
+        <form id="contactForm" class="row g-2">
+          <div class="col-12"><input class="form-control bg-transparent text-light" type="text" placeholder="Your name" id="name" required></div>
+          <div class="col-12"><input class="form-control bg-transparent text-light" type="email" placeholder="Email address" id="email" required></div>
+          <div class="col-12"><textarea class="form-control bg-transparent text-light" id="message" rows="3" placeholder="Brief project description" required></textarea></div>
+          <div class="col-12 text-end"><button class="btn btn-outline-light" type="submit">Send</button></div>
+        </form>
+        <div id="formAlert" class="mt-2" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center muted">
+    <div>© "Mark" — Full-Stack Web Developer. Mobile friendly • Clear CTAs • Proofread & professional design.</div>
+  </footer>
+</main>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Smooth scroll for nav links
+  $(document).on('click','a.nav-link[href^="#"]', function(e){
+    e.preventDefault();
+    var t = $($(this).attr('href'));
+    if(t.length) $('html,body').animate({scrollTop: t.offset().top - 70}, 500);
+  });
+
+  // Simple front-end form handler (uses mailto as fallback)
+  $('#contactForm').on('submit', function(e){
+    e.preventDefault();
+    var name = $('#name').val().trim(), email = $('#email').val().trim(), msg = $('#message').val().trim();
+    if(!name||!email||!msg){
+      showAlert('Please complete all fields');
+      return;
+    }
+    // open mail client with prefilled content
+    var subject = encodeURIComponent('Project inquiry from ' + name);
+    var body = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+msg);
+    window.location.href = 'mailto:markmounirr@gmail.com?subject='+subject+'&body='+body;
+    showAlert('Opening your email client...', true);
+  });
+
+  function showAlert(txt, success){
+    var el = $('#formAlert');
+    el.text(txt).css('color', success? '#b8bb26' : '#fb4934').show();
+    setTimeout(()=>el.fadeOut(),3000);
+  }
+</script>
+</body>
+</html>
+
