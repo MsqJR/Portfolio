@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en" data-theme="dark" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // Prevent theme flash before rendering
+    (function() {
+      const theme = localStorage.getItem('portfolio-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <title>Mark Mounir — Production Backend & Systems Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #fe8019;
+      --accent-2: #b8bb26;
+      --font-mono: 'Fira Code', monospace;
+      
+      /* Modular Typographic Scale (1.25x Major Third) */
+      --fs-xs: 0.8rem;       /* ~12.8px */
+      --fs-sm: 1rem;         /* ~16px */
+      --fs-base: 1.25rem;    /* ~20px (Readable body text) */
+      --fs-lg: 1.563rem;     /* ~25px */
+      --fs-xl: 1.953rem;     /* ~31.25px */
+      --fs-2xl: 2.441rem;    /* ~39px */
+      --fs-3xl: 3.052rem;    /* ~48.8px */
+      --fs-hero: clamp(2.25rem, 5vw + 1rem, 3.5rem);
+      
+      --lh-heading: 1.3;
+      --lh-body: 1.7;
+    }
+    [data-theme="dark"] {
+      --bg: #1d2021;
+      --panel: #282828;
+      --panel-inner: #32302f;
+      --text: #ebdbb2;
+      --muted: #a89984;
+      --border: rgba(255, 255, 255, 0.05);
+      --hero-grad: linear-gradient(145deg, #242627, #1d2021);
+      --scroll-thumb: #504945;
+      --toggler-filter: none;
+    }
+    [data-theme="light"] {
+      --bg: #fbf1c7;
+      --panel: #f2e5bc;
+      --panel-inner: #ebdbb2;
+      --text: #282828;       /* High-contrast dark text */
+      --muted: #504945;      /* WCAG AA compliant muted contrast */
+      --border: rgba(0, 0, 0, 0.08);
+      --hero-grad: linear-gradient(145deg, #f4e8c1, #fbf1c7);
+      --scroll-thumb: #d5c4a1;
+      --toggler-filter: invert(1);
+    }
+    
+    html, body, input, select, textarea, button {
+      font-family: var(--font-mono);
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--fs-base);
+      line-height: var(--lh-body);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scroll-thumb);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: var(--lh-heading);
+      color: var(--text);
+      transition: color 0.25s ease;
+    }
+    h1 { font-size: var(--fs-3xl); }
+    h2 { font-size: var(--fs-2xl); }
+    h3 { font-size: var(--fs-xl); }
+    h4 { font-size: var(--fs-lg); }
+    h5 { font-size: var(--fs-sm); }
+    
+    a, .nav-link, .theme-toggle-btn, .cta, .service-card, .btn {
+      transition: all 0.2s ease-in-out;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); }
+    
+    p, .muted-body {
+      max-width: 65ch; /* Maximum readable width */
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; }
+    .hero { background: var(--hero-grad); border: 1px solid rgba(254, 128, 25, 0.25); }
+    .hero h1 {
+      font-size: var(--fs-hero);
+      line-height: 1.15;
+    }
+    .brand-square { width: 80px; height: 80px; border-radius: 8px; background: var(--panel-inner); border: 1px solid var(--border); }
+    .brand-title { font-weight: 700; font-size: var(--fs-sm); color: var(--text); letter-spacing: 0.02em; }
+    .brand-subtitle { font-size: var(--fs-xs); color: var(--muted); }
+    .muted { color: var(--muted); }
+    
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(184, 187, 38, 0.1);
+      color: var(--accent-2);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      font-size: var(--fs-xs);
+      border: 1px solid rgba(184, 187, 38, 0.2);
+      letter-spacing: 0.02em;
+    }
+    .usp {
+      border: 1px solid rgba(254, 128, 25, 0.25);
+      background: rgba(254, 128, 25, 0.03);
+      padding: 1.25rem;
+      border-radius: 6px;
+    }
+    .skill-pill {
+      background: var(--panel-inner);
+      border-radius: 4px;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      display: inline-block;
+      margin: 0.2rem;
+      font-size: var(--fs-xs);
+      color: var(--text);
+    }
+    .cta { background: var(--accent); color: #1d2021; font-weight: 600; border: 1px solid var(--accent); }
+    .cta:hover { background: transparent; color: var(--accent); }
+    
+    .nav-link {
+      color: var(--muted);
+      font-size: var(--fs-sm);
+      letter-spacing: 0.02em;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--text); }
+    .theme-toggle-btn {
+      background: var(--panel-inner);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+    }
+    
+    .service-card {
+      background: var(--panel-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.25rem;
+      height: 100%;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .custom-badge {
+      background: var(--panel-inner);
+      color: var(--text);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.02em;
+    }
+    .info-block {
+      background: var(--panel-inner);
+      border: 1px solid rgba(184, 187, 38, 0.25);
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    
+    .form-control, .form-select, .form-control:focus, .form-select:focus {
+      background: var(--panel-inner) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text) !important;
+      font-size: var(--fs-sm);
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--accent) !important;
+      box-shadow: none !important;
+    }
+    .form-control::placeholder {
+      color: var(--muted) !important;
+      opacity: 0.8;
+    }
+    /* Autofill overrides to prevent light yellow browser defaults */
+    .form-control:-webkit-autofill,
+    .form-control:-webkit-autofill:hover,
+    .form-control:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--text) !important;
+      -webkit-box-shadow: 0 0 0px 1000px var(--panel-inner) inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+    
+    /* Navbar Custom Theming */
+    .navbar {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(29, 32, 33, 0.85);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    [data-theme="light"] .navbar {
+      background: rgba(251, 241, 199, 0.85);
+    }
+    .navbar-toggler {
+      border-color: var(--border) !important;
+    }
+    .navbar-toggler:focus {
+      box-shadow: none !important;
+    }
+    .navbar-toggler-icon {
+      filter: var(--toggler-filter);
+    }
+    
+    /* Dynamic Theme Link Visibility Patches */
+    [data-theme="light"] .nav-link { color: var(--muted) !important; }
+    [data-theme="light"] .nav-link:hover { color: var(--text) !important; }
+    [data-theme="light"] .nav-link.active { color: var(--accent) !important; font-weight: 600; }
+    .card-panel h3, .card-panel h4, .card-panel h5, .card-panel h6 { color: var(--text); transition: color 0.25s ease; }
+    
+    footer { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 2rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top">
+  <div class="container-lg">
+    <a class="navbar-brand d-flex align-items-center" href="#console">
+      <img class="brand-square object-fit-cover me-3" src="./assets/img/MA1.jpg" alt="Mark Mounir" onerror="this.style.display='none';">
+      <div>
+        <div class="brand-title">Mark Mounir</div>
+        <div class="brand-subtitle">Backend & Systems Architect</div>
+      </div>
+    </a>
+    <div class="d-flex align-items-center order-lg-last ms-2">
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
+    </div>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto me-2">
+        <li class="nav-item"><a class="nav-link active" href="#console">[01_console]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">[02_services]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#logs">[03_logs]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">[04_audit]</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container-xl mt-4">
+  <!-- SECTION 1: CONSOLE (HERO) -->
+  <section id="console" class="hero mb-5 p-4 card-panel scroll-margin" style="scroll-margin-top: 100px;">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="mb-3">
+          <span class="status-indicator"><i class="fa-solid fa-circle-dot"></i> Accepting US & Global VPS / Backend Contracts</span>
+        </div>
+        <h1>High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.</h1>
+        <p class="muted-body lead mt-3">
+          I am a Software Engineer crafting full websites and robust backend systems using the fastest modern tech stacks. Whether you have a tight deadline or need clean, high-performance logic, I engineer exactly what you want.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <a class="btn cta px-4" href="#contact">Book a Free Architecture Review</a>
+          <a class="btn btn-outline-light px-4" href="#services" style="color: var(--text); border-color: var(--border);">View Service Pipelines</a>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4 mt-md-0">
+        <div class="card-panel p-3 bg-transparent">
+          <div class="text-uppercase small fw-bold" style="color: var(--accent); letter-spacing: 0.5px;">The Technical Guarantee</div>
+          <div class="muted small mt-2">
+            <strong>Rigorous Engineering:</strong> I build production-ready systems using Go, .NET Core, Java Spring Boot, and Python Django/DRF. All pipelines are optimized for speed, security, and integration test coverage.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: SERVICES -->
+  <section id="services" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
+    <h2 class="fw-bold mb-2">Services & Architectural Solutions</h2>
+    <p class="muted mb-4">Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.</p>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ Full-Stack Development ]</div>
+          <h5 class="fw-bold">Full-Stack Website & System Engineering</h5>
+          <p class="muted small mt-2">Go from a raw specification to a fully deployed, high-speed website and service backend. Engineered in .NET, Go, or Java to deliver exactly what you want, optimized for immediate scalability.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-bolt me-1"></i> Fast Delivery Guarantee</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ DevOps & Cloud VPS ]</div>
+          <h5 class="fw-bold">High-Speed VPS Infrastructure & Deployment</h5>
+          <p class="muted small mt-2">Ditch slow cloud overhead. I configure secure, high-performance Linux VPS systems, firewall perimeters, and system logging to host your applications with maximum execution speeds.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-server me-1"></i> Built on Latest Tech</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ Backend APIs & Databases ]</div>
+          <h5 class="fw-bold">Backend API Development & Query Optimization</h5>
+          <p class="muted small mt-2">Optimize slow Python DRF/Django models, Spring Boot code, or query structures. I profile heavy schema tables, resolve deadlocks, and rewrite pipelines to meet tight performance deadlines.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-gauge-high me-1"></i> Tight Deadline Readiness</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: LOGS -->
+  <section id="logs" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <h2 class="fw-bold mb-2">Production Blueprint Validations</h2>
+        <p class="muted mb-4">Deep architecture summaries detailing technical choices made to guarantee high system stability.</p>
+        
+        <div class="row g-4">
+          <!-- Medify Project -->
+          <div class="col-12">
+            <div class="card-panel p-4">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <h4 class="fw-bold mb-0">Medify</h4>
+                <span class="badge custom-badge border border-secondary p-2">TypeScript / Next.js / Django</span>
+              </div>
+              <p class="muted mt-3 small">
+                The all-in-one medical website builder featuring custom clinic subdomains, e-commerce storefronts, appointment scheduling, and AI patient assistants.
+              </p>
+              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
+                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <ul class="small muted ps-3 mt-2 mb-0">
+                  <li>Multi-tenant architecture routing dynamic subdomains to isolated clinic configurations.</li>
+                  <li>Responsive web rendering utilizing Next.js 16 and a Django REST Framework API backplane.</li>
+                  <li>Asynchronous appointment scheduling systems integrated with automated patient assistant pipelines.</li>
+                </ul>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Medify" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+            </div>
+          </div>
+
+          <!-- MINISOCIAL Project -->
+          <div class="col-12">
+            <div class="card-panel p-4">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <h4 class="fw-bold mb-0">MINISOCIAL</h4>
+                <span class="badge custom-badge border border-secondary p-2">Java / WildFly / ActiveMQ JMS</span>
+              </div>
+              <p class="muted mt-3 small">
+                A message-driven social infrastructure backplane utilizing WildFly application servers and decoupled message queues.
+              </p>
+              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
+                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <ul class="small muted ps-3 mt-2 mb-0">
+                  <li>JMS notification system utilizing ActiveMQ standalone-MINISOC topic routines for event processing.</li>
+                  <li>Manual JBoss connection configurations to support high-throughput message publishing.</li>
+                  <li>Decoupled listener patterns isolating real-time system alerts from primary client requests.</li>
+                </ul>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/MINISOCIAL" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+            </div>
+          </div>
+
+          <!-- Booking Project -->
+          <div class="col-12">
+            <div class="card-panel p-4">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <h4 class="fw-bold mb-0">Booking</h4>
+                <span class="badge custom-badge border border-secondary p-2">Java / Maven / Reservation Core</span>
+              </div>
+              <p class="muted mt-3 small">
+                A Java-based resource management and reservation system with secure user authentication and scheduling validation.
+              </p>
+              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
+                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <ul class="small muted ps-3 mt-2 mb-0">
+                  <li>Modular Maven project structure decoupling resource endpoints from test routines.</li>
+                  <li>Strict user login and session authentication system protecting private dashboard API states.</li>
+                  <li>Comprehensive endpoint integration coverage validated using Postman test collections.</li>
+                </ul>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Booking" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+            </div>
+          </div>
+
+          <!-- Event-Planner Project -->
+          <div class="col-12">
+            <div class="card-panel p-4">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <h4 class="fw-bold mb-0">Event-Planner</h4>
+                <span class="badge custom-badge border border-secondary p-2">Go / React / Nginx / Docker Compose</span>
+              </div>
+              <p class="muted mt-3 small">
+                A fully containerized multi-service platform for event planning, deployed using modern virtualization standards.
+              </p>
+              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
+                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <ul class="small muted ps-3 mt-2 mb-0">
+                  <li>Containerized bridge network linking a Go API, React + Vite frontend, and a MySQL database.</li>
+                  <li>Optimized Alpine-based micro-images reducing deploy footprint (Backend: ~15MB, Frontend: ~25MB).</li>
+                  <li>Production-ready Nginx static asset routing configured with optimized browser caching layers.</li>
+                </ul>
+              </div>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Event-Planner" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Specifications Column -->
+      <div class="col-lg-4">
+        <div class="card-panel p-4 mb-4">
+          <h4 class="h5 mb-3">System Specifications</h4>
+          <div class="small">
+            <span class="muted d-block mb-1">Rigid Standards:</span>
+            <div class="fw-bold mb-3"><i class="fa-solid fa-certificate me-1" style="color: var(--accent-2)"></i> ISTQB Certified Tester (CTFL)</div>
+            <span class="muted d-block mb-1">Production Experience:</span>
+            <div class="fw-bold mb-3"><i class="fa-solid fa-briefcase me-1 text-info"></i> Backend Developer Intern — GB Corp</div>
+            <span class="muted d-block mb-1">Foundational Track:</span>
+            <div class="fw-bold">B.Sc. in Software Engineering<br><span class="muted fw-normal text-sm">Cairo University (FCAI)</span></div>
+          </div>
+        </div>
+
+        <div class="card-panel p-4">
+          <h4 class="h5 mb-3">Validated Production Stack</h4>
+          <div class="d-flex flex-wrap gap-1">
+            <span class="skill-pill"><i class="fa-solid fa-code me-1"></i> .NET Core / C#</span>
+            <span class="skill-pill"><i class="fa-brands fa-golang me-1"></i> Go (Golang)</span>
+            <span class="skill-pill"><i class="fa-brands fa-java me-1"></i> Java Spring Boot</span>
+            <span class="skill-pill"><i class="fa-brands fa-python me-1"></i> Python Django / DRF</span>
+            <span class="skill-pill"><i class="fa-solid fa-database me-1"></i> SQL Server / Postgres</span>
+            <span class="skill-pill"><i class="fa-brands fa-linux me-1"></i> Advanced Linux / VPS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CONTACT -->
+  <section id="contact" class="scroll-margin" style="scroll-margin-top: 100px;">
+    <div class="card-panel p-4">
+      <div class="row g-4 align-items-start">
+        <div class="col-md-5">
+          <h4 class="fw-bold">Book a System Audit</h4>
+          <p class="muted small mb-3">
+            Submit your system requirements or stack bottlenecks. Whether you need a full website built on the latest tech or have a tight deadline, I will deliver exactly what you want.
+          </p>
+          <div class="info-block mb-3">
+            <div class="small fw-bold text-white mb-2"><i class="fa-solid fa-circle-info me-1" style="color: var(--accent-2)"></i> What happens next?</div>
+            <div class="small muted">1. Manual log evaluation within 24 hours.</div>
+            <div class="small muted">2. You receive a direct structural feedback blueprint via mail.</div>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-light px-3" href="assets/resume.pdf" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);" download><i class="fa-solid fa-file-pdf me-1"></i> Technical Resume</a>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <form id="contactForm" class="row g-2">
+            <div class="col-md-6">
+              <input class="form-control" type="text" placeholder="Company Name" id="name" required>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" type="email" placeholder="Email Address" id="email" required>
+            </div>
+            <div class="col-12">
+              <select class="form-select" id="projectTrack" required>
+                <option value="" disabled selected>Select System Target Engagement</option>
+                <option value="Full MVP Build">Full MVP Engine Architecture Build (~4-6 Weeks)</option>
+                <option value="VPS Setup">Isolated VPS Infrastructure Deployment</option>
+                <option value="Query Optimization">Database Optimization & Logic Refactoring</option>
+                <option value="Custom Contract">Other Custom Backend Logic Block</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <textarea class="form-control" id="message" rows="4" placeholder="Briefly describe your current stack bottlenecks or project goal parameters..." required></textarea>
+            </div>
+            <div class="col-12 text-end">
+              <button class="btn cta px-4" type="submit">Submit Parameters</button>
+            </div>
+          </form>
+          <div id="formAlert" class="mt-2 text-sm" style="display:none; font-family: monospace;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="container-xl mb-4 text-center">
+  <div class="muted small d-flex justify-content-between flex-wrap gap-2 px-2">
+    <div>&copy; 2026 Mark Mounir. All operational rights reserved.</div>
+    <div><i class="fa-solid fa-circle" style="color: var(--accent-2); font-size: 0.75rem;"></i> System Status: Operational</div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  (function() {
+    // Theme Switcher Handler
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeIcon(currentTheme);
+    
+    $('#themeToggle').on('click', function() {
+      let activeTheme = document.documentElement.getAttribute('data-theme');
+      let targetTheme = activeTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      localStorage.setItem('portfolio-theme', targetTheme);
+      updateThemeIcon(targetTheme);
+    });
+    
+    function updateThemeIcon(theme) {
+      if (theme === 'dark') { $('#themeIcon').removeClass('fa-sun').addClass('fa-moon'); }
+      else { $('#themeIcon').removeClass('fa-moon').addClass('fa-sun'); }
+    }
+    
+    // Smooth Hash Navigation Scroll & Active link highlight on scroll
+    $(window).on('scroll', function() {
+      const scrollPos = $(document).scrollTop();
+      $('.navbar-nav a').each(function() {
+        const currLink = $(this);
+        const refElement = $(currLink.attr('href'));
+        if (refElement.position().top - 150 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+          $('.navbar-nav a').removeClass('active');
+          currLink.addClass('active');
+        }
+      });
+    });
+
+    // Form Submission Handler
+    $('#contactForm').on('submit', function(e) {
+      e.preventDefault();
+      var name = $('#name').val().trim(), email = $('#email').val().trim(), track = $('#projectTrack').val(), msg = $('#message').val().trim();
+      if(!name || !email || !track || !msg) return;
+      var subject = encodeURIComponent('Inquiry: ' + track + ' - ' + name);
+      var body = encodeURIComponent('Origin: ' + name + '\nReply-To: ' + email + '\nSelected Target: ' + track + '\n\nDescription:\n' + msg);
+      window.location.href = 'mailto:markmounirr@gmail.com?subject=' + subject + '&body=' + body;
+    });
+  })();
+</script>
+</body>
+</html>
