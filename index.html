@@ -3,18 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link id="bootstrapStyle" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <script>
-    // Prevent theme flash before rendering
+    // Initialize theme and language immediately to prevent layout flashing
     (function() {
       const theme = localStorage.getItem('portfolio-theme') || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
+      
+      const lang = localStorage.getItem('portfolio-lang') || 'en';
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      
+      if (lang === 'ar') {
+        document.getElementById('bootstrapStyle').href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css';
+      }
     })();
   </script>
   <title>Mark Mounir — Production Backend & Systems Infrastructure</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
@@ -65,6 +73,16 @@
       font-size: var(--fs-base);
       line-height: var(--lh-body);
       transition: background 0.25s ease, color 0.25s ease;
+    }
+    
+    /* Cairo Arabic styling rule */
+    html[lang="ar"], 
+    html[lang="ar"] body, 
+    html[lang="ar"] input, 
+    html[lang="ar"] select, 
+    html[lang="ar"] textarea, 
+    html[lang="ar"] button {
+      font-family: 'Cairo', var(--font-mono), sans-serif;
     }
     
     /* Scrollbar Styling */
@@ -154,7 +172,8 @@
       letter-spacing: 0.02em;
     }
     .nav-link:hover, .nav-link.active { color: var(--text); }
-    .theme-toggle-btn {
+    
+    .theme-toggle-btn, .lang-btn {
       background: var(--panel-inner);
       border: 1px solid var(--border);
       color: var(--text);
@@ -166,6 +185,11 @@
       justify-content: center;
       width: 44px;
       height: 44px;
+    }
+    .lang-btn {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
     
     .service-card {
@@ -206,7 +230,6 @@
       color: var(--muted) !important;
       opacity: 0.8;
     }
-    /* Autofill overrides to prevent light yellow browser defaults */
     .form-control:-webkit-autofill,
     .form-control:-webkit-autofill:hover,
     .form-control:-webkit-autofill:focus {
@@ -248,24 +271,43 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top">
+  <script>
+    // Keep backdrop-filter background adaptive to theme toggle
+    (function() {
+      const updateNavbarBg = () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+          navbar.style.background = theme === 'dark' ? 'rgba(29, 32, 33, 0.85)' : 'rgba(251, 241, 199, 0.85)';
+        }
+      };
+      window.addEventListener('DOMContentLoaded', () => {
+        updateNavbarBg();
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          setTimeout(updateNavbarBg, 50);
+        });
+      });
+    })();
+  </script>
   <div class="container-lg">
     <a class="navbar-brand d-flex align-items-center" href="#console">
       <img class="brand-square object-fit-cover me-3" src="./assets/img/MA1.jpg" alt="Mark Mounir" onerror="this.style.display='none';">
       <div>
-        <div class="brand-title">Mark Mounir</div>
-        <div class="brand-subtitle">Backend & Systems Architect</div>
+        <div class="brand-title" data-i18n="nav-title">Mark Mounir</div>
+        <div class="brand-subtitle" data-i18n="nav-subtitle">Backend & Systems Architect</div>
       </div>
     </a>
     <div class="d-flex align-items-center order-lg-last ms-2">
+      <button class="lang-btn me-2" id="langToggle" aria-label="Toggle language">AR</button>
       <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
       <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
     </div>
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto me-2">
-        <li class="nav-item"><a class="nav-link active" href="#console">[01_console]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">[02_services]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#logs">[03_logs]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">[04_audit]</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#console" data-i18n="nav-console">[01_console]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services" data-i18n="nav-services">[02_services]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#logs" data-i18n="nav-logs">[03_logs]</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">[04_audit]</a></li>
       </ul>
     </div>
   </div>
@@ -277,22 +319,22 @@
     <div class="row align-items-center">
       <div class="col-md-8">
         <div class="mb-3">
-          <span class="status-indicator"><i class="fa-solid fa-circle-dot"></i> Accepting US & Global VPS / Backend Contracts</span>
+          <span class="status-indicator"><i class="fa-solid fa-circle-dot"></i> <span data-i18n="status-indicator">Accepting US & Global VPS / Backend Contracts</span></span>
         </div>
-        <h1>High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.</h1>
-        <p class="muted-body lead mt-3">
+        <h1 data-i18n="hero-title">High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.</h1>
+        <p class="muted-body lead mt-3" data-i18n="hero-desc">
           I am a Software Engineer crafting full websites and robust backend systems using the fastest modern tech stacks. Whether you have a tight deadline or need clean, high-performance logic, I engineer exactly what you want.
         </p>
         <div class="d-flex flex-wrap gap-2 mt-4">
-          <a class="btn cta px-4" href="#contact">Book a Free Architecture Review</a>
-          <a class="btn btn-outline-light px-4" href="#services" style="color: var(--text); border-color: var(--border);">View Service Pipelines</a>
+          <a class="btn cta px-4" href="#contact" data-i18n="hero-cta-audit">Book a Free Architecture Review</a>
+          <a class="btn btn-outline-light px-4" href="#services" style="color: var(--text); border-color: var(--border);" data-i18n="hero-cta-services">View Service Pipelines</a>
         </div>
       </div>
       <div class="col-md-4 mt-4 mt-md-0">
         <div class="card-panel p-3 bg-transparent">
-          <div class="text-uppercase small fw-bold" style="color: var(--accent); letter-spacing: 0.5px;">The Technical Guarantee</div>
+          <div class="text-uppercase small fw-bold" style="color: var(--accent); letter-spacing: 0.5px;" data-i18n="guarantee-title">The Technical Guarantee</div>
           <div class="muted small mt-2">
-            <strong>Rigorous Engineering:</strong> I build production-ready systems using Go, .NET Core, Java Spring Boot, and Python Django/DRF. All pipelines are optimized for speed, security, and integration test coverage.
+            <strong data-i18n="guarantee-bold">Rigorous Engineering:</strong> <span data-i18n="guarantee-desc">I build production-ready systems using Go, .NET Core, Java Spring Boot, and Python Django/DRF. All pipelines are optimized for speed, security, and integration test coverage.</span>
           </div>
         </div>
       </div>
@@ -301,32 +343,32 @@
 
   <!-- SECTION 2: SERVICES -->
   <section id="services" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
-    <h2 class="fw-bold mb-2">Services & Architectural Solutions</h2>
-    <p class="muted mb-4">Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.</p>
+    <h2 class="fw-bold mb-2" data-i18n="services-title">Services & Architectural Solutions</h2>
+    <p class="muted mb-4" data-i18n="services-desc">Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.</p>
 
     <div class="row g-4 mb-4">
       <div class="col-md-4">
         <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ Full-Stack Development ]</div>
-          <h5 class="fw-bold">Full-Stack Website & System Engineering</h5>
-          <p class="muted small mt-2">Go from a raw specification to a fully deployed, high-speed website and service backend. Engineered in .NET, Go, or Java to deliver exactly what you want, optimized for immediate scalability.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-bolt me-1"></i> Fast Delivery Guarantee</div>
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-1">[ Full-Stack Development ]</div>
+          <h5 class="fw-bold" data-i18n="service-title-1">Full-Stack Website & System Engineering</h5>
+          <p class="muted small mt-2" data-i18n="service-desc-1">Go from a raw specification to a fully deployed, high-speed website and service backend. Engineered in .NET, Go, or Java to deliver exactly what you want, optimized for immediate scalability.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-bolt me-1"></i> <span data-i18n="service-highlight-1">Fast Delivery Guarantee</span></div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ DevOps & Cloud VPS ]</div>
-          <h5 class="fw-bold">High-Speed VPS Infrastructure & Deployment</h5>
-          <p class="muted small mt-2">Ditch slow cloud overhead. I configure secure, high-performance Linux VPS systems, firewall perimeters, and system logging to host your applications with maximum execution speeds.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-server me-1"></i> Built on Latest Tech</div>
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-2">[ DevOps & Cloud VPS ]</div>
+          <h5 class="fw-bold" data-i18n="service-title-2">High-Speed VPS Infrastructure & Deployment</h5>
+          <p class="muted small mt-2" data-i18n="service-desc-2">Ditch slow cloud overhead. I configure secure, high-performance Linux VPS systems, firewall perimeters, and system logging to host your applications with maximum execution speeds.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-server me-1"></i> <span data-i18n="service-highlight-2">Built on Latest Tech</span></div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;">[ Backend APIs & Databases ]</div>
-          <h5 class="fw-bold">Backend API Development & Query Optimization</h5>
-          <p class="muted small mt-2">Optimize slow Python DRF/Django models, Spring Boot code, or query structures. I profile heavy schema tables, resolve deadlocks, and rewrite pipelines to meet tight performance deadlines.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-gauge-high me-1"></i> Tight Deadline Readiness</div>
+          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-3">[ Backend APIs & Databases ]</div>
+          <h5 class="fw-bold" data-i18n="service-title-3">Backend API Development & Query Optimization</h5>
+          <p class="muted small mt-2" data-i18n="service-desc-3">Optimize slow Python DRF/Django models, Spring Boot code, or query structures. I profile heavy schema tables, resolve deadlocks, and rewrite pipelines to meet tight performance deadlines.</p>
+          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-gauge-high me-1"></i> <span data-i18n="service-highlight-3">Tight Deadline Readiness</span></div>
         </div>
       </div>
     </div>
@@ -336,29 +378,29 @@
   <section id="logs" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
     <div class="row g-4">
       <div class="col-lg-8">
-        <h2 class="fw-bold mb-2">Production Blueprint Validations</h2>
-        <p class="muted mb-4">Deep architecture summaries detailing technical choices made to guarantee high system stability.</p>
+        <h2 class="fw-bold mb-2" data-i18n="logs-title">Production Blueprint Validations</h2>
+        <p class="muted mb-4" data-i18n="logs-desc">Deep architecture summaries detailing technical choices made to guarantee high system stability.</p>
         
         <div class="row g-4">
           <!-- Medify Project -->
           <div class="col-12">
             <div class="card-panel p-4">
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0">Medify</h4>
-                <span class="badge custom-badge border border-secondary p-2">TypeScript / Next.js / Django</span>
+                <h4 class="fw-bold mb-0" data-i18n="project-title-1">Medify</h4>
+                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-1">TypeScript / Next.js / Django</span>
               </div>
-              <p class="muted mt-3 small">
+              <p class="muted mt-3 small" data-i18n="project-desc-1">
                 The all-in-one medical website builder featuring custom clinic subdomains, e-commerce storefronts, appointment scheduling, and AI patient assistants.
               </p>
               <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-1">[ Architectural Decisions ]</strong>
                 <ul class="small muted ps-3 mt-2 mb-0">
-                  <li>Multi-tenant architecture routing dynamic subdomains to isolated clinic configurations.</li>
-                  <li>Responsive web rendering utilizing Next.js 16 and a Django REST Framework API backplane.</li>
-                  <li>Asynchronous appointment scheduling systems integrated with automated patient assistant pipelines.</li>
+                  <li data-i18n="project-decisions-li1-1">Multi-tenant architecture routing dynamic subdomains to isolated clinic configurations.</li>
+                  <li data-i18n="project-decisions-li2-1">Responsive web rendering utilizing Next.js 16 and a Django REST Framework API backplane.</li>
+                  <li data-i18n="project-decisions-li3-1">Asynchronous appointment scheduling systems integrated with automated patient assistant pipelines.</li>
                 </ul>
               </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Medify" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Medify" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-1">Review Structural Codebase</span></a>
             </div>
           </div>
 
@@ -366,21 +408,21 @@
           <div class="col-12">
             <div class="card-panel p-4">
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0">MINISOCIAL</h4>
-                <span class="badge custom-badge border border-secondary p-2">Java / WildFly / ActiveMQ JMS</span>
+                <h4 class="fw-bold mb-0" data-i18n="project-title-2">MINISOCIAL</h4>
+                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-2">Java / WildFly / ActiveMQ JMS</span>
               </div>
-              <p class="muted mt-3 small">
+              <p class="muted mt-3 small" data-i18n="project-desc-2">
                 A message-driven social infrastructure backplane utilizing WildFly application servers and decoupled message queues.
               </p>
               <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-2">[ Architectural Decisions ]</strong>
                 <ul class="small muted ps-3 mt-2 mb-0">
-                  <li>JMS notification system utilizing ActiveMQ standalone-MINISOC topic routines for event processing.</li>
-                  <li>Manual JBoss connection configurations to support high-throughput message publishing.</li>
-                  <li>Decoupled listener patterns isolating real-time system alerts from primary client requests.</li>
+                  <li data-i18n="project-decisions-li1-2">JMS notification system utilizing ActiveMQ standalone-MINISOC topic routines for event processing.</li>
+                  <li data-i18n="project-decisions-li2-2">Manual JBoss connection configurations to support high-throughput message publishing.</li>
+                  <li data-i18n="project-decisions-li3-2">Decoupled listener patterns isolating real-time system alerts from primary client requests.</li>
                 </ul>
               </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/MINISOCIAL" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/MINISOCIAL" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-2">Review Structural Codebase</span></a>
             </div>
           </div>
 
@@ -388,21 +430,21 @@
           <div class="col-12">
             <div class="card-panel p-4">
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0">Booking</h4>
-                <span class="badge custom-badge border border-secondary p-2">Java / Maven / Reservation Core</span>
+                <h4 class="fw-bold mb-0" data-i18n="project-title-3">Booking</h4>
+                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-3">Java / Maven / Reservation Core</span>
               </div>
-              <p class="muted mt-3 small">
+              <p class="muted mt-3 small" data-i18n="project-desc-3">
                 A Java-based resource management and reservation system with secure user authentication and scheduling validation.
               </p>
               <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-3">[ Architectural Decisions ]</strong>
                 <ul class="small muted ps-3 mt-2 mb-0">
-                  <li>Modular Maven project structure decoupling resource endpoints from test routines.</li>
-                  <li>Strict user login and session authentication system protecting private dashboard API states.</li>
-                  <li>Comprehensive endpoint integration coverage validated using Postman test collections.</li>
+                  <li data-i18n="project-decisions-li1-3">Modular Maven project structure decoupling resource endpoints from test routines.</li>
+                  <li data-i18n="project-decisions-li2-3">Strict user login and session authentication system protecting private dashboard API states.</li>
+                  <li data-i18n="project-decisions-li3-3">Comprehensive endpoint integration coverage validated using Postman test collections.</li>
                 </ul>
               </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Booking" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Booking" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-3">Review Structural Codebase</span></a>
             </div>
           </div>
 
@@ -410,21 +452,21 @@
           <div class="col-12">
             <div class="card-panel p-4">
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0">Event-Planner</h4>
-                <span class="badge custom-badge border border-secondary p-2">Go / React / Nginx / Docker Compose</span>
+                <h4 class="fw-bold mb-0" data-i18n="project-title-4">Event-Planner</h4>
+                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-4">Go / React / Nginx / Docker Compose</span>
               </div>
-              <p class="muted mt-3 small">
+              <p class="muted mt-3 small" data-i18n="project-desc-4">
                 A fully containerized multi-service platform for event planning, deployed using modern virtualization standards.
               </p>
               <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);">[ Architectural Decisions ]</strong>
+                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-4">[ Architectural Decisions ]</strong>
                 <ul class="small muted ps-3 mt-2 mb-0">
-                  <li>Containerized bridge network linking a Go API, React + Vite frontend, and a MySQL database.</li>
-                  <li>Optimized Alpine-based micro-images reducing deploy footprint (Backend: ~15MB, Frontend: ~25MB).</li>
-                  <li>Production-ready Nginx static asset routing configured with optimized browser caching layers.</li>
+                  <li data-i18n="project-decisions-li1-4">Containerized bridge network linking a Go API, React + Vite frontend, and a MySQL database.</li>
+                  <li data-i18n="project-decisions-li2-4">Optimized Alpine-based micro-images reducing deploy footprint (Backend: ~15MB, Frontend: ~25MB).</li>
+                  <li data-i18n="project-decisions-li3-4">Production-ready Nginx static asset routing configured with optimized browser caching layers.</li>
                 </ul>
               </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Event-Planner" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> Review Structural Codebase</a>
+              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Event-Planner" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-4">Review Structural Codebase</span></a>
             </div>
           </div>
         </div>
@@ -433,19 +475,19 @@
       <!-- Specifications Column -->
       <div class="col-lg-4">
         <div class="card-panel p-4 mb-4">
-          <h4 class="h5 mb-3">System Specifications</h4>
+          <h4 class="h5 mb-3" data-i18n="specs-title">System Specifications</h4>
           <div class="small">
-            <span class="muted d-block mb-1">Rigid Standards:</span>
-            <div class="fw-bold mb-3"><i class="fa-solid fa-certificate me-1" style="color: var(--accent-2)"></i> ISTQB Certified Tester (CTFL)</div>
-            <span class="muted d-block mb-1">Production Experience:</span>
-            <div class="fw-bold mb-3"><i class="fa-solid fa-briefcase me-1 text-info"></i> Backend Developer Intern — GB Corp</div>
-            <span class="muted d-block mb-1">Foundational Track:</span>
-            <div class="fw-bold">B.Sc. in Software Engineering<br><span class="muted fw-normal text-sm">Cairo University (FCAI)</span></div>
+            <span class="muted d-block mb-1" data-i18n="specs-label-1">Rigid Standards:</span>
+            <div class="fw-bold mb-3"><i class="fa-solid fa-certificate me-1" style="color: var(--accent-2)"></i> <span data-i18n="specs-val-1">ISTQB Certified Tester (CTFL)</span></div>
+            <span class="muted d-block mb-1" data-i18n="specs-label-2">Production Experience:</span>
+            <div class="fw-bold mb-3"><i class="fa-solid fa-briefcase me-1 text-info"></i> <span data-i18n="specs-val-2">Backend Developer Intern — GB Corp</span></div>
+            <span class="muted d-block mb-1" data-i18n="specs-label-3">Foundational Track:</span>
+            <div class="fw-bold" data-i18n="specs-val-3">B.Sc. in Software Engineering<br><span class="muted fw-normal text-sm">Cairo University (FCAI)</span></div>
           </div>
         </div>
 
         <div class="card-panel p-4">
-          <h4 class="h5 mb-3">Validated Production Stack</h4>
+          <h4 class="h5 mb-3" data-i18n="stack-title">Validated Production Stack</h4>
           <div class="d-flex flex-wrap gap-1">
             <span class="skill-pill"><i class="fa-solid fa-code me-1"></i> .NET Core / C#</span>
             <span class="skill-pill"><i class="fa-brands fa-golang me-1"></i> Go (Golang)</span>
@@ -464,41 +506,37 @@
     <div class="card-panel p-4">
       <div class="row g-4 align-items-start">
         <div class="col-md-5">
-          <h4 class="fw-bold">Book a System Audit</h4>
-          <p class="muted small mb-3">
+          <h4 class="fw-bold" data-i18n="contact-title">Book a System Audit</h4>
+          <p class="muted small mb-3" data-i18n="contact-desc">
             Submit your system requirements or stack bottlenecks. Whether you need a full website built on the latest tech or have a tight deadline, I will deliver exactly what you want.
           </p>
           <div class="info-block mb-3">
-            <div class="small fw-bold text-white mb-2"><i class="fa-solid fa-circle-info me-1" style="color: var(--accent-2)"></i> What happens next?</div>
-            <div class="small muted">1. Manual log evaluation within 24 hours.</div>
-            <div class="small muted">2. You receive a direct structural feedback blueprint via mail.</div>
+            <div class="small fw-bold text-white mb-2"><i class="fa-solid fa-circle-info me-1" style="color: var(--accent-2)"></i> <span data-i18n="contact-info-title">What happens next?</span></div>
+            <div class="small muted" data-i18n="contact-info-li1">1. Manual log evaluation within 24 hours.</div>
+            <div class="small muted" data-i18n="contact-info-li2">2. You receive a direct structural feedback blueprint via mail.</div>
           </div>
           <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-light px-3" href="assets/resume.pdf" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);" download><i class="fa-solid fa-file-pdf me-1"></i> Technical Resume</a>
+            <a class="btn btn-outline-light px-3" href="assets/resume.pdf" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);" download><i class="fa-solid fa-file-pdf me-1"></i> <span data-i18n="contact-resume">Technical Resume</span></a>
           </div>
         </div>
         <div class="col-md-7">
           <form id="contactForm" class="row g-2">
             <div class="col-md-6">
-              <input class="form-control" type="text" placeholder="Company Name" id="name" required>
+              <input class="form-control" type="text" placeholder="Identity / Company Name" id="name" required>
             </div>
             <div class="col-md-6">
-              <input class="form-control" type="email" placeholder="Email Address" id="email" required>
+              <input class="form-control" type="email" placeholder="Endpoint Email Address" id="email" required>
             </div>
             <div class="col-12">
               <select class="form-select" id="projectTrack" required>
-                <option value="" disabled selected>Select System Target Engagement</option>
-                <option value="Full MVP Build">Full MVP Engine Architecture Build (~4-6 Weeks)</option>
-                <option value="VPS Setup">Isolated VPS Infrastructure Deployment</option>
-                <option value="Query Optimization">Database Optimization & Logic Refactoring</option>
-                <option value="Custom Contract">Other Custom Backend Logic Block</option>
+                <!-- populated dynamically -->
               </select>
             </div>
             <div class="col-12">
-              <textarea class="form-control" id="message" rows="4" placeholder="Briefly describe your current stack bottlenecks or project goal parameters..." required></textarea>
+              <textarea class="form-control" id="message" rows="4" placeholder="Briefly describe your current stack bottlenecks..." required></textarea>
             </div>
             <div class="col-12 text-end">
-              <button class="btn cta px-4" type="submit">Submit Parameters</button>
+              <button class="btn cta px-4" type="submit" data-i18n="contact-btn-submit">Submit Parameters</button>
             </div>
           </form>
           <div id="formAlert" class="mt-2 text-sm" style="display:none; font-family: monospace;"></div>
@@ -510,14 +548,224 @@
 
 <footer class="container-xl mb-4 text-center">
   <div class="muted small d-flex justify-content-between flex-wrap gap-2 px-2">
-    <div>&copy; 2026 Mark Mounir. All operational rights reserved.</div>
-    <div><i class="fa-solid fa-circle" style="color: var(--accent-2); font-size: 0.75rem;"></i> System Status: Operational</div>
+    <div data-i18n="footer-copy">&copy; 2026 Mark Mounir. All operational rights reserved.</div>
+    <div><i class="fa-solid fa-circle" style="color: var(--accent-2); font-size: 0.75rem;"></i> <span data-i18n="footer-status">System Status: Operational</span></div>
   </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
   (function() {
+    // Internationalization dictionary
+    const i18n = {
+      en: {
+        "nav-title": "Mark Mounir",
+        "nav-subtitle": "Backend & Systems Architect",
+        "nav-console": "[01_console]",
+        "nav-services": "[02_services]",
+        "nav-logs": "[03_logs]",
+        "nav-contact": "[04_audit]",
+        "status-indicator": "Accepting US & Global VPS / Backend Contracts",
+        "hero-title": "High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.",
+        "hero-desc": "Software Engineer crafting high-performance full websites and systems under tight deadlines. Powered by modern, high-speed stacks.",
+        "hero-cta-audit": "Book a Free Architecture Review",
+        "hero-cta-services": "View Service Pipelines",
+        "guarantee-title": "The Technical Guarantee",
+        "guarantee-bold": "Rigorous Engineering:",
+        "guarantee-desc": "Production-ready systems in Go, .NET Core, Spring Boot, and Django. Optimized for execution speed and test coverage.",
+        
+        "services-title": "Services & Architectural Solutions",
+        "services-desc": "Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.",
+        
+        "service-tag-1": "[ Full-Stack Development ]",
+        "service-title-1": "Full-Stack Website & System Engineering",
+        "service-desc-1": "End-to-end web apps and backend services. Built in .NET, Go, or Java for immediate scalability.",
+        "service-highlight-1": "Fast Delivery Guarantee",
+        
+        "service-tag-2": "[ DevOps & Cloud VPS ]",
+        "service-title-2": "High-Speed VPS Infrastructure & Deployment",
+        "service-desc-2": "Secure Linux VPS setups with firewalls, application isolation, and logging for maximum speed.",
+        "service-highlight-2": "Built on Latest Tech",
+        
+        "service-tag-3": "[ Backend APIs & Databases ]",
+        "service-title-3": "Backend API Development & Query Optimization",
+        "service-desc-3": "Optimize slow APIs, database queries, and code bottleneck points to meet tight deadlines.",
+        "service-highlight-3": "Tight Deadline Readiness",
+        
+        "logs-title": "Production Blueprint Validations",
+        "logs-desc": "Deep architecture summaries detailing technical choices made to guarantee high system stability.",
+        
+        "project-title-1": "Medify",
+        "project-badge-1": "TypeScript / Next.js / Django",
+        "project-desc-1": "Medical SaaS featuring clinic subdomains, storefronts, appointment scheduling, and AI assistants.",
+        "project-decisions-title-1": "[ Architectural Decisions ]",
+        "project-decisions-li1-1": "Multi-tenant routing for clinic-specific subdomains.",
+        "project-decisions-li2-1": "Fast Next.js frontend with a Django REST API.",
+        "project-decisions-li3-1": "Async scheduling system with AI assistants.",
+        "project-btn-1": "Review Structural Codebase",
+        
+        "project-title-2": "MINISOCIAL",
+        "project-badge-2": "Java / WildFly / ActiveMQ JMS",
+        "project-desc-2": "Decoupled social network backend using WildFly servers and ActiveMQ JMS messaging.",
+        "project-decisions-title-2": "[ Architectural Decisions ]",
+        "project-decisions-li1-2": "ActiveMQ JMS topic handling for async notifications.",
+        "project-decisions-li2-2": "Custom JBoss configs for high message throughput.",
+        "project-decisions-li3-2": "Decoupled listeners to isolate alerts from request flows.",
+        "project-btn-2": "Review Structural Codebase",
+        
+        "project-title-3": "Booking",
+        "project-badge-3": "Java / Maven / Reservation Core",
+        "project-desc-3": "Java resource allocation and booking engine with authentication and Postman test coverage.",
+        "project-decisions-title-3": "[ Architectural Decisions ]",
+        "project-decisions-li1-3": "Modular Maven structure separating endpoints from tests.",
+        "project-decisions-li2-3": "Secure session authentication for dashboard API states.",
+        "project-decisions-li3-3": "Endpoint routing validated via Postman test collections.",
+        "project-btn-3": "Review Structural Codebase",
+        
+        "project-title-4": "Event-Planner",
+        "project-badge-4": "Go / React / Nginx / Docker Compose",
+        "project-desc-4": "Containerized multi-service stack with a Go API, React frontend, MySQL, and Nginx.",
+        "project-decisions-title-4": "[ Architectural Decisions ]",
+        "project-decisions-li1-4": "Docker bridge network linking Go, React, and MySQL.",
+        "project-decisions-li2-4": "Micro Alpine images reducing build size (15MB backend).",
+        "project-decisions-li3-4": "Nginx static routing with optimized caching layers.",
+        "project-btn-4": "Review Structural Codebase",
+        
+        "specs-title": "System Specifications",
+        "specs-label-1": "Rigid Standards:",
+        "specs-val-1": "ISTQB Certified Tester (CTFL)",
+        "specs-label-2": "Production Experience:",
+        "specs-val-2": "Backend Developer Intern — GB Corp",
+        "specs-label-3": "Foundational Track:",
+        "specs-val-3": "B.Sc. in Software Engineering<br><span class=\"muted fw-normal text-sm\">Cairo University (FCAI)</span>",
+        "stack-title": "Validated Production Stack",
+        
+        "contact-title": "Book a System Audit",
+        "contact-desc": "Submit your system requirements or stack bottlenecks. Whether you need a full website built on the latest tech or have a tight deadline, I will deliver exactly what you want.",
+        "contact-info-title": "What happens next?",
+        "contact-info-li1": "1. Manual log evaluation within 24 hours.",
+        "contact-info-li2": "2. You receive a direct structural feedback blueprint via mail.",
+        "contact-resume": "Technical Resume",
+        "contact-btn-submit": "Submit Parameters",
+        
+        "footer-copy": "&copy; 2026 Mark Mounir. All operational rights reserved.",
+        "footer-status": "System Status: Operational",
+        
+        // Form specific texts
+        "placeholder-name": "Identity / Company Name",
+        "placeholder-email": "Endpoint Email Address",
+        "placeholder-msg": "Briefly describe your current stack bottlenecks or project goal parameters...",
+        "select-default": "Select System Target Engagement",
+        "select-opt1": "Full MVP Engine Architecture Build (~4-6 Weeks)",
+        "select-opt2": "Isolated VPS Infrastructure Deployment",
+        "select-opt3": "Database Optimization & Logic Refactoring",
+        "select-opt4": "Other Custom Backend Logic Block"
+      },
+      ar: {
+        "nav-title": "Mark Mounir",
+        "nav-subtitle": "Backend & Systems Architect",
+        "nav-console": "[01_الكونسول]",
+        "nav-services": "[02_الخدمات]",
+        "nav-logs": "[03_السجلات]",
+        "nav-contact": "[04_التدقيق]",
+        "status-indicator": "متاح للتعاقدات الخارجية والمحلية للبنى التحتية و backend",
+        "hero-title": "مواقع ويب سريعة وأنظمة متكاملة. مصممة للنمو، وتُسلم في الوقت المحدد.",
+        "hero-desc": "مهندس برمجيات لتطوير مواقع ويب وأنظمة backend عالية الأداء تحت مواعيد تسليم ضيقة وبأسرع التقنيات الحديثة.",
+        "hero-cta-audit": "احجز مراجعة مجانية للبنية التحتية",
+        "hero-cta-services": "عرض مسارات الخدمات",
+        "guarantee-title": "الضمان التقني",
+        "guarantee-bold": "هندسة صارمة:",
+        "guarantee-desc": "أنظمة جاهزة للإنتاج باستخدام Go و .NET Core و Spring Boot و Django. محسنة لسرعة التنفيذ والتغطية الاختبارية.",
+        
+        "services-title": "الخدمات والحلول المعمارية",
+        "services-desc": "عروض تقنية محسنة ومصممة خصيصاً لسرعة التنفيذ وأمان النظام ومتطلبات الأعمال المخصصة.",
+        
+        "service-tag-1": "[ تطوير الويب المتكامل ]",
+        "service-title-1": "هندسة وتطوير مواقع الويب والأنظمة الكاملة",
+        "service-desc-1": "تطوير تطبيقات ويب وأنظمة backend متكاملة بـ .NET أو Go أو Java قابلة للتوسع الفوري.",
+        "service-highlight-1": "ضمان التسليم السريع",
+        
+        "service-tag-2": "[ إدارة العمليات والبنية التحتية ]",
+        "service-title-2": "بناء ونشر البنية التحتية لخوادم VPS عالية السرعة",
+        "service-desc-2": "إعداد خوادم Linux VPS آمنة مع جدران حماية وعزل للتطبيقات وسجلات نظام لأقصى سرعة.",
+        "service-highlight-2": "مبني على أحدث التقنيات",
+        
+        "service-tag-3": "[ أنظمة backend وقواعد البيانات ]",
+        "service-title-3": "تطوير واجهات برمجة backend وتحسين الاستعلامات",
+        "service-desc-3": "تحسين واجهات البرمجة واستعلامات قواعد البيانات وحل مشاكل الأداء البرمجي في أسرع وقت.",
+        "service-highlight-3": "جاهزية لمواعيد التسليم الضيقة",
+        
+        "logs-title": "توثيق وبراهين النظم الفعلية",
+        "logs-desc": "ملخصات معمارية عميقة توضح القرارات التقنية التي اتخذت لضمان ثبات واستقرار النظام العالي.",
+        
+        "project-title-1": "Medify",
+        "project-badge-1": "TypeScript / Next.js / Django",
+        "project-desc-1": "منصة طبية تدعم نطاقات فرعية، ومتاجر إلكترونية، وجدولة مواعيد ومساعدين ذكاء اصطناعي.",
+        "project-decisions-title-1": "[ القرارات المعمارية ]",
+        "project-decisions-li1-1": "توجيه متعدد المستأجرين لنطاقات العيادات الفرعية.",
+        "project-decisions-li2-1": "واجهة Next.js سريعة مع backend بـ Django REST API.",
+        "project-decisions-li3-1": "جدولة مواعيد غير متزامنة مدمجة مع مساعدي الذكاء الاصطناعي.",
+        "project-btn-1": "مراجعة الهيكل البرمجي للمشروع",
+        
+        "project-title-2": "MINISOCIAL",
+        "project-badge-2": "Java / WildFly / ActiveMQ JMS",
+        "project-desc-2": "نظام backend لشبكة اجتماعية يعتمد على خوادم WildFly ورسائل JMS عبر ActiveMQ.",
+        "project-decisions-title-2": "[ القرارات المعمارية ]",
+        "project-decisions-li1-2": "معالجة ActiveMQ JMS لإشعارات غير متزامنة.",
+        "project-decisions-li2-2": "إعدادات اتصالات مخصصة لإنتاجية رسائل عالية.",
+        "project-decisions-li3-2": "مستمعات معزولة لعزل التنبيهات عن تدفق الطلبات.",
+        "project-btn-2": "مراجعة الهيكل البرمجي للمشروع",
+        
+        "project-title-3": "Booking",
+        "project-badge-3": "Java / Maven / Reservation Core",
+        "project-desc-3": "نظام حجز موارد بجافا مع مصادقة مستخدمين وتغطية كاملة لاختبارات Postman.",
+        "project-decisions-title-3": "[ القرارات المعمارية ]",
+        "project-decisions-li1-3": "هيكل Maven مجزأ يفصل بين نقاط النهاية والاختبارات.",
+        "project-decisions-li2-3": "مصادقة جلسات آمنة لواجهات برمجة لوحة التحكم.",
+        "project-decisions-li3-3": "التحقق من صحة مسارات واجهات البرمجة عبر Postman.",
+        "project-btn-3": "مراجعة الهيكل البرمجي للمشروع",
+        
+        "project-title-4": "Event-Planner",
+        "project-badge-4": "Go / React / Nginx / Docker Compose",
+        "project-desc-4": "بنية خدمات محواة بالكامل تضم Go API وواجهة React وقاعدة MySQL وخادم Nginx.",
+        "project-decisions-title-4": "[ القرارات المعمارية ]",
+        "project-decisions-li1-4": "شبكة Docker داخلية تربط Go و React و MySQL.",
+        "project-decisions-li2-4": "حاويات Alpine مصغرة لتقليل حجم البناء (خلفية 15MB).",
+        "project-decisions-li3-4": "توجيه Nginx للملفات الساكنة مع تخزين مؤقت محسن.",
+        "project-btn-4": "مراجعة الهيكل البرمجي للمشروع",
+        
+        "specs-title": "مواصفات وخبرات المهندس",
+        "specs-label-1": "المعايير المتبعة:",
+        "specs-val-1": "فاحص معتمد دولياً من ISTQB (CTFL)",
+        "specs-label-2": "الخبرة العملية:",
+        "specs-val-2": "متدرب تطوير backend — شركة جي بي كورب",
+        "specs-label-3": "الدراسة الأكاديمية:",
+        "specs-val-3": "بكالوريوس هندسة البرمجيات<br><span class=\"muted fw-normal text-sm\">جامعة القاهرة (FCAI)</span>",
+        "stack-title": "البنية التقنية المعتمدة",
+        
+        "contact-title": "احجز جلسة تدقيق للنظام",
+        "contact-desc": "أرسل متطلبات نظامك أو مشاكل الـ backend التي تواجهها. سواء كنت بحاجة إلى موقع ويب كامل أو كان لديك موعد تسليم ضيق، سأقدم لك ما تريده بدقة.",
+        "contact-info-title": "ماذا يحدث بعد ذلك؟",
+        "contact-info-li1": "1. تقييم وتحليل يدوي للمتطلبات خلال 24 ساعة.",
+        "contact-info-li2": "2. تتلقى مخطط تغذية راجعة هيكلي ومباشر عبر البريد الإلكتروني.",
+        "contact-resume": "السيرة الذاتية التقنية",
+        "contact-btn-submit": "إرسال المتطلبات",
+        
+        "footer-copy": "&copy; 2026 Mark Mounir. جميع الحقوق التشغيلية محفوظة.",
+        "footer-status": "حالة النظام: يعمل بشكل طبيعي",
+        
+        // Form specific texts
+        "placeholder-name": "الاسم / اسم الشركة",
+        "placeholder-email": "عنوان البريد الإلكتروني",
+        "placeholder-msg": "صف بإيجاز متطلبات مشروعك أو المشاكل التي تواجه البنية التقنية الحالية...",
+        "select-default": "اختر نوع التعاقد المطلوب",
+        "select-opt1": "بناء البنية المعمارية للنظام الكامل (~4-6 أسابيع)",
+        "select-opt2": "نشر وإعداد البنية التحتية لخوادم VPS المعزولة",
+        "select-opt3": "تحسين قاعدة البيانات وإعادة بناء الكود",
+        "select-opt4": "مهام backend مخصصة أخرى"
+      }
+    };
+    
     // Theme Switcher Handler
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     updateThemeIcon(currentTheme);
@@ -533,6 +781,68 @@
     function updateThemeIcon(theme) {
       if (theme === 'dark') { $('#themeIcon').removeClass('fa-sun').addClass('fa-moon'); }
       else { $('#themeIcon').removeClass('fa-moon').addClass('fa-sun'); }
+    }
+    
+    // Language Switcher Handler
+    let currentLang = localStorage.getItem('portfolio-lang') || 'en';
+    applyLanguage(currentLang);
+    
+    $('#langToggle').on('click', function() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      applyLanguage(currentLang);
+    });
+    
+    function applyLanguage(lang) {
+      // Save lang selection
+      localStorage.setItem('portfolio-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      
+      // Update Bootstrap stylesheet link href
+      const bootstrapLink = document.getElementById('bootstrapStyle');
+      if (bootstrapLink) {
+        bootstrapLink.href = lang === 'ar' 
+          ? 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css' 
+          : 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
+      }
+      
+      // Update switcher button label
+      $('#langToggle').text(lang === 'en' ? 'AR' : 'EN');
+      
+      // Update elements with data-i18n attributes
+      $('[data-i18n]').each(function() {
+        const key = $(this).attr('data-i18n');
+        if (i18n[lang][key]) {
+          $(this).html(i18n[lang][key]);
+        }
+      });
+      
+      // Update Form Inputs Placeholders
+      $('#name').attr('placeholder', i18n[lang]["placeholder-name"]);
+      $('#email').attr('placeholder', i18n[lang]["placeholder-email"]);
+      $('#message').attr('placeholder', i18n[lang]["placeholder-msg"]);
+      
+      // Re-populate select options
+      const projectTrackSelect = $('#projectTrack');
+      projectTrackSelect.empty();
+      projectTrackSelect.append($('<option>', {
+        value: "",
+        disabled: true,
+        selected: true,
+        text: i18n[lang]["select-default"]
+      }));
+      projectTrackSelect.append($('<option>', { value: "Full MVP Build", text: i18n[lang]["select-opt1"] }));
+      projectTrackSelect.append($('<option>', { value: "VPS Setup", text: i18n[lang]["select-opt2"] }));
+      projectTrackSelect.append($('<option>', { value: "Query Optimization", text: i18n[lang]["select-opt3"] }));
+      projectTrackSelect.append($('<option>', { value: "Custom Contract", text: i18n[lang]["select-opt4"] }));
+      
+      // Navbar brand adjustments for RTL spacing
+      const brandSquare = $('.brand-square');
+      if (lang === 'ar') {
+        brandSquare.removeClass('me-3').addClass('ms-3');
+      } else {
+        brandSquare.removeClass('ms-3').addClass('me-3');
+      }
     }
     
     // Smooth Hash Navigation Scroll & Active link highlight on scroll
