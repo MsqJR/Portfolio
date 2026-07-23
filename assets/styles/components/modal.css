@@ -1,0 +1,89 @@
+/* Modals & CLI Drawer Overlay */
+.cli-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.cli-modal.open {
+  display: flex;
+}
+
+.cli-container {
+  background: var(--panel);
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 760px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.cli-output {
+  height: 320px;
+  padding: 1rem;
+  overflow-y: auto;
+  background: var(--code-bg);
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+.cli-line {
+  margin-bottom: 0.4rem;
+}
+
+.cli-prompt-line {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--panel-header);
+  border-top: 1px solid var(--border);
+}
+
+.cli-prompt-symbol {
+  color: var(--accent-green);
+  margin-right: 0.6rem;
+  font-weight: 700;
+}
+
+.cli-input {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.cli-input:focus {
+  outline: none;
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.shortcut-row:last-child {
+  border-bottom: none;
+}
+
+.shortcut-label {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.shortcut-keys {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}

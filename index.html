@@ -3,874 +3,553 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link id="bootstrapStyle" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <script defer src="assets/js/telemetry.js"
-                data-website-id="929051cf-cc37-40b6-9d0f-0d53c1cfb284"
-                data-host-url="https://cloud.umami.is"></script>
-  <script>
-    // Initialize theme and language immediately to prevent layout flashing
-    (function() {
-      const theme = localStorage.getItem('portfolio-theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', theme);
-      
-      const lang = localStorage.getItem('portfolio-lang') || 'en';
-      document.documentElement.setAttribute('lang', lang);
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-      
-      if (lang === 'ar') {
-        document.getElementById('bootstrapStyle').href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css';
-      }
-    })();
-  </script>
-  <title>Mark Mounir — Production Backend & Systems Infrastructure</title>
+  <title>Mark Mounir — Software Engineer & Enterprise Systems Specialist</title>
+  <meta name="description" content="Portfolio of Mark Mounir: Software Engineer with 3+ years of experience & 15+ completed projects. Building enterprise web platforms, custom management dashboards, and high-uptime VPS hosting.">
+  
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.0.1/index.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #fe8019;
-      --accent-2: #b8bb26;
-      --font-mono: 'Fira Code', monospace;
-      
-      /* Modular Typographic Scale (1.25x Major Third) */
-      --fs-xs: 0.8rem;       /* ~12.8px */
-      --fs-sm: 1rem;         /* ~16px */
-      --fs-base: 1.25rem;    /* ~20px (Readable body text) */
-      --fs-lg: 1.563rem;     /* ~25px */
-      --fs-xl: 1.953rem;     /* ~31.25px */
-      --fs-2xl: 2.441rem;    /* ~39px */
-      --fs-3xl: 3.052rem;    /* ~48.8px */
-      --fs-hero: clamp(2.25rem, 5vw + 1rem, 3.5rem);
-      
-      --lh-heading: 1.3;
-      --lh-body: 1.7;
-    }
-    [data-theme="dark"] {
-      --bg: #1d2021;
-      --panel: #282828;
-      --panel-inner: #32302f;
-      --text: #ebdbb2;
-      --muted: #a89984;
-      --border: rgba(255, 255, 255, 0.05);
-      --hero-grad: linear-gradient(145deg, #242627, #1d2021);
-      --scroll-thumb: #504945;
-      --toggler-filter: none;
-    }
-    [data-theme="light"] {
-      --bg: #fbf1c7;
-      --panel: #f2e5bc;
-      --panel-inner: #ebdbb2;
-      --text: #282828;       /* High-contrast dark text */
-      --muted: #504945;      /* WCAG AA compliant muted contrast */
-      --border: rgba(0, 0, 0, 0.08);
-      --hero-grad: linear-gradient(145deg, #f4e8c1, #fbf1c7);
-      --scroll-thumb: #d5c4a1;
-      --toggler-filter: invert(1);
-    }
-    
-    html, body, input, select, textarea, button {
-      font-family: var(--font-mono);
-      background: var(--bg);
-      color: var(--text);
-      font-size: var(--fs-base);
-      line-height: var(--lh-body);
-      transition: background 0.25s ease, color 0.25s ease;
-    }
-    
-    /* Cairo Arabic styling rule */
-    html[lang="ar"], 
-    html[lang="ar"] body, 
-    html[lang="ar"] input, 
-    html[lang="ar"] select, 
-    html[lang="ar"] textarea, 
-    html[lang="ar"] button {
-      font-family: 'Cairo', var(--font-mono), sans-serif;
-    }
-    
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--scroll-thumb);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent);
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      line-height: var(--lh-heading);
-      color: var(--text);
-      transition: color 0.25s ease;
-    }
-    h1 { font-size: var(--fs-3xl); }
-    h2 { font-size: var(--fs-2xl); }
-    h3 { font-size: var(--fs-xl); }
-    h4 { font-size: var(--fs-lg); }
-    h5 { font-size: var(--fs-sm); }
-    
-    a, .nav-link, .theme-toggle-btn, .cta, .service-card, .btn {
-      transition: all 0.2s ease-in-out;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent-2); }
-    
-    p, .muted-body {
-      max-width: 65ch; /* Maximum readable width */
-      margin-bottom: 1.5rem;
-    }
-    
-    .card-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; }
-    .hero { background: var(--hero-grad); border: 1px solid rgba(254, 128, 25, 0.25); }
-    .hero h1 {
-      font-size: var(--fs-hero);
-      line-height: 1.15;
-    }
-    .brand-square { width: 80px; height: 80px; border-radius: 8px; background: var(--panel-inner); border: 1px solid var(--border); }
-    .brand-title { font-weight: 700; font-size: var(--fs-sm); color: var(--text); letter-spacing: 0.02em; }
-    .brand-subtitle { font-size: var(--fs-xs); color: var(--muted); }
-    .muted { color: var(--muted); }
-    
-    .status-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(184, 187, 38, 0.1);
-      color: var(--accent-2);
-      padding: 0.35rem 0.75rem;
-      border-radius: 4px;
-      font-size: var(--fs-xs);
-      border: 1px solid rgba(184, 187, 38, 0.2);
-      letter-spacing: 0.02em;
-    }
-    .usp {
-      border: 1px solid rgba(254, 128, 25, 0.25);
-      background: rgba(254, 128, 25, 0.03);
-      padding: 1.25rem;
-      border-radius: 6px;
-    }
-    .skill-pill {
-      background: var(--panel-inner);
-      border-radius: 4px;
-      padding: 0.3rem 0.65rem;
-      border: 1px solid var(--border);
-      display: inline-block;
-      margin: 0.2rem;
-      font-size: var(--fs-xs);
-      color: var(--text);
-    }
-    .cta { background: var(--accent); color: #1d2021; font-weight: 600; border: 1px solid var(--accent); }
-    .cta:hover { background: transparent; color: var(--accent); }
-    
-    .nav-link {
-      color: var(--muted);
-      font-size: var(--fs-sm);
-      letter-spacing: 0.02em;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--text); }
-    
-    .theme-toggle-btn, .lang-btn {
-      background: var(--panel-inner);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-    }
-    .lang-btn {
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    
-    .service-card {
-      background: var(--panel-inner);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2.25rem;
-      height: 100%;
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-    .custom-badge {
-      background: var(--panel-inner);
-      color: var(--text);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.02em;
-    }
-    .info-block {
-      background: var(--panel-inner);
-      border: 1px solid rgba(184, 187, 38, 0.25);
-      border-radius: 6px;
-      padding: 1.25rem;
-    }
-    
-    .form-control, .form-select, .form-control:focus, .form-select:focus {
-      background: var(--panel-inner) !important;
-      border: 1px solid var(--border) !important;
-      color: var(--text) !important;
-      font-size: var(--fs-sm);
-    }
-    .form-control:focus, .form-select:focus {
-      border-color: var(--accent) !important;
-      box-shadow: none !important;
-    }
-    .form-control::placeholder {
-      color: var(--muted) !important;
-      opacity: 0.8;
-    }
-    .form-control:-webkit-autofill,
-    .form-control:-webkit-autofill:hover,
-    .form-control:-webkit-autofill:focus {
-      -webkit-text-fill-color: var(--text) !important;
-      -webkit-box-shadow: 0 0 0px 1000px var(--panel-inner) inset !important;
-      transition: background-color 5000s ease-in-out 0s;
-    }
-    
-    /* Navbar Custom Theming */
-    .navbar {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: rgba(29, 32, 33, 0.85);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.25s ease, border-color 0.25s ease;
-    }
-    [data-theme="light"] .navbar {
-      background: rgba(251, 241, 199, 0.85);
-    }
-    .navbar-toggler {
-      border-color: var(--border) !important;
-    }
-    .navbar-toggler:focus {
-      box-shadow: none !important;
-    }
-    .navbar-toggler-icon {
-      filter: var(--toggler-filter);
-    }
-    
-    /* Dynamic Theme Link Visibility Patches */
-    [data-theme="light"] .nav-link { color: var(--muted) !important; }
-    [data-theme="light"] .nav-link:hover { color: var(--text) !important; }
-    [data-theme="light"] .nav-link.active { color: var(--accent) !important; font-weight: 600; }
-    .card-panel h3, .card-panel h4, .card-panel h5, .card-panel h6 { color: var(--text); transition: color 0.25s ease; }
-    
-    footer { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 2rem; }
-  </style>
+  
+  <!-- Telemetry & Init -->
+  <script defer src="assets/js/telemetry.js" data-website-id="929051cf-cc37-40b6-9d0f-0d53c1cfb284" data-host-url="https://cloud.umami.is"></script>
+  <script src="assets/js/init.js"></script>
+
+  <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top">
-  <script>
-    // Keep backdrop-filter background adaptive to theme toggle
-    (function() {
-      const updateNavbarBg = () => {
-        const theme = document.documentElement.getAttribute('data-theme');
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-          navbar.style.background = theme === 'dark' ? 'rgba(29, 32, 33, 0.85)' : 'rgba(251, 241, 199, 0.85)';
-        }
-      };
-      window.addEventListener('DOMContentLoaded', () => {
-        updateNavbarBg();
-        document.getElementById('themeToggle').addEventListener('click', () => {
-          setTimeout(updateNavbarBg, 50);
-        });
-      });
-    })();
-  </script>
-  <div class="container-lg">
-    <a class="navbar-brand d-flex align-items-center" href="#console">
-      <img class="brand-square object-fit-cover me-3" src="./assets/img/MA1.jpg" alt="Mark Mounir" onerror="this.style.display='none';">
-      <div>
-        <div class="brand-title" data-i18n="nav-title">Mark Mounir</div>
-        <div class="brand-subtitle" data-i18n="nav-subtitle">Backend & Systems Architect</div>
+  <header class="system-header">
+    <div class="system-header-inner">
+      <div class="sys-brand">
+        <span class="status-dot"></span>
+        <a href="#home" onclick="switchView('home')" style="color: var(--text); font-family: var(--font-sans);">MARK MOUNIR</a>
+        <span style="color: var(--muted); font-size: 0.8rem;">[v3.4.0]</span>
       </div>
-    </a>
-    <div class="d-flex align-items-center order-lg-last ms-2">
-      <button class="lang-btn me-2" id="langToggle" aria-label="Toggle language">AR</button>
-      <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light/dark theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
-      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu" aria-label="Toggle navigation" aria-expanded="false"><span class="navbar-toggler-icon"></span></button>
-    </div>
-    <div class="collapse navbar-collapse" id="navmenu">
-      <ul class="navbar-nav ms-auto me-2">
-        <li class="nav-item"><a class="nav-link active" href="#console" data-i18n="nav-console">[01_console]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services" data-i18n="nav-services">[02_services]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#logs" data-i18n="nav-logs">[03_logs]</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav-contact">[04_audit]</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
-<main class="container-xl mt-4">
-  <!-- SECTION 1: CONSOLE (HERO) -->
-  <section id="console" class="hero mb-5 p-4 card-panel scroll-margin" style="scroll-margin-top: 100px;">
-    <div class="row align-items-center">
-      <div class="col-md-8">
-        <div class="mb-3">
-          <span class="status-indicator"><i class="fa-solid fa-circle-dot"></i> <span data-i18n="status-indicator">Accepting US & Global VPS / Backend Contracts</span></span>
-        </div>
-        <h1 data-i18n="hero-title">High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.</h1>
-        <p class="muted-body lead mt-3" data-i18n="hero-desc">
-          I am a Software Engineer crafting full websites and robust backend systems using the fastest modern tech stacks. Whether you have a tight deadline or need clean, high-performance logic, I engineer exactly what you want.
-        </p>
-        <div class="d-flex flex-wrap gap-2 mt-4">
-          <a class="btn cta px-4" href="#contact" data-i18n="hero-cta-audit">Book a Free Architecture Review</a>
-          <a class="btn btn-outline-light px-4" href="#services" style="color: var(--text); border-color: var(--border);" data-i18n="hero-cta-services">View Service Pipelines</a>
-        </div>
-      </div>
-      <div class="col-md-4 mt-4 mt-md-0">
-        <div class="card-panel p-3 bg-transparent">
-          <div class="text-uppercase small fw-bold" style="color: var(--accent); letter-spacing: 0.5px;" data-i18n="guarantee-title">The Technical Guarantee</div>
-          <div class="muted small mt-2">
-            <strong data-i18n="guarantee-bold">Rigorous Engineering:</strong> <span data-i18n="guarantee-desc">I build production-ready systems using Go, .NET Core, Java Spring Boot, and Python Django/DRF. All pipelines are optimized for speed, security, and integration test coverage.</span>
-          </div>
-        </div>
+      <nav>
+        <ul class="nav-routes">
+          <li><button class="nav-btn active" id="nav-home" onclick="switchView('home')"><i class="fa-solid fa-terminal"></i> Overview</button></li>
+          <li><button class="nav-btn" id="nav-services" onclick="switchView('services')"><i class="fa-solid fa-cubes"></i> Services</button></li>
+          <li><button class="nav-btn" id="nav-projects" onclick="switchView('projects')" title="Structural Projects"><i class="fa-solid fa-code-branch"></i> Projects</button></li>
+          <li><button class="nav-btn" id="nav-audit" onclick="switchView('audit')" title="Free Architecture Review"><i class="fa-solid fa-shield-halved"></i> Audit</button></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" onclick="toggleShortcutsModal()" title="Keyboard Shortcuts (?)">
+          <i class="fa-solid fa-keyboard"></i> <span class="btn-label">Shortcuts</span> <span class="hotkey-hint">?</span>
+        </button>
+        <button class="action-btn" onclick="toggleCliModal()" title="Interactive CLI (/)">
+          <i class="fa-solid fa-terminal"></i> <span class="btn-label">CLI</span> <span class="hotkey-hint">/</span>
+        </button>
+        <button class="action-btn" onclick="toggleTheme()" title="Toggle Theme (t)">
+          <i class="fa-solid fa-circle-half-stroke"></i> <span id="theme-text" class="btn-label">THEME</span> <span class="hotkey-hint">t</span>
+        </button>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- SECTION 2: SERVICES -->
-  <section id="services" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
-    <h2 class="fw-bold mb-2" data-i18n="services-title">Services & Architectural Solutions</h2>
-    <p class="muted mb-4" data-i18n="services-desc">Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.</p>
+  <!-- Main Content Container -->
+  <main class="app-container">
 
-    <div class="row g-4 mb-4">
-      <div class="col-md-4">
-        <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-1">[ Full-Stack Development ]</div>
-          <h5 class="fw-bold" data-i18n="service-title-1">Full-Stack Website & System Engineering</h5>
-          <p class="muted small mt-2" data-i18n="service-desc-1">Go from a raw specification to a fully deployed, high-speed website and service backend. Engineered in .NET, Go, or Java to deliver exactly what you want, optimized for immediate scalability.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-bolt me-1"></i> <span data-i18n="service-highlight-1">Fast Delivery Guarantee</span></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-2">[ DevOps & Cloud VPS ]</div>
-          <h5 class="fw-bold" data-i18n="service-title-2">High-Speed VPS Infrastructure & Deployment</h5>
-          <p class="muted small mt-2" data-i18n="service-desc-2">Ditch slow cloud overhead. I configure secure, high-performance Linux VPS systems, firewall perimeters, and system logging to host your applications with maximum execution speeds.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-server me-1"></i> <span data-i18n="service-highlight-2">Built on Latest Tech</span></div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card">
-          <div class="text-uppercase small fw-bold mb-3" style="color: var(--accent); letter-spacing: 1px;" data-i18n="service-tag-3">[ Backend APIs & Databases ]</div>
-          <h5 class="fw-bold" data-i18n="service-title-3">Backend API Development & Query Optimization</h5>
-          <p class="muted small mt-2" data-i18n="service-desc-3">Optimize slow Python DRF/Django models, Spring Boot code, or query structures. I profile heavy schema tables, resolve deadlocks, and rewrite pipelines to meet tight performance deadlines.</p>
-          <div class="fw-bold mt-3" style="color: var(--accent-2); font-size: var(--fs-xs);"><i class="fa-solid fa-gauge-high me-1"></i> <span data-i18n="service-highlight-3">Tight Deadline Readiness</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: LOGS -->
-  <section id="logs" class="mb-5 scroll-margin" style="scroll-margin-top: 100px;">
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <h2 class="fw-bold mb-2" data-i18n="logs-title">Production Blueprint Validations</h2>
-        <p class="muted mb-4" data-i18n="logs-desc">Deep architecture summaries detailing technical choices made to guarantee high system stability.</p>
-        
-        <div class="row g-4">
-          <!-- Medify Project -->
-          <div class="col-12">
-            <div class="card-panel p-4">
-              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0" data-i18n="project-title-1">Medify</h4>
-                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-1">TypeScript / Next.js / Django</span>
-              </div>
-              <p class="muted mt-3 small" data-i18n="project-desc-1">
-                The all-in-one medical website builder featuring custom clinic subdomains, e-commerce storefronts, appointment scheduling, and AI patient assistants.
-              </p>
-              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-1">[ Architectural Decisions ]</strong>
-                <ul class="small muted ps-3 mt-2 mb-0">
-                  <li data-i18n="project-decisions-li1-1">Multi-tenant architecture routing dynamic subdomains to isolated clinic configurations.</li>
-                  <li data-i18n="project-decisions-li2-1">Responsive web rendering utilizing Next.js 16 and a Django REST Framework API backplane.</li>
-                  <li data-i18n="project-decisions-li3-1">Asynchronous appointment scheduling systems integrated with automated patient assistant pipelines.</li>
-                </ul>
-              </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Medify" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-1">Review Structural Codebase</span></a>
-            </div>
+    <!-- VIEW 1: HOME OVERVIEW -->
+    <section id="view-home" class="view-section active-view">
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title">
+            <i class="fa-solid fa-server" style="color: var(--accent);"></i> mark@production-node-01:~# cat system_spec.md
           </div>
-
-          <!-- MINISOCIAL Project -->
-          <div class="col-12">
-            <div class="card-panel p-4">
-              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0" data-i18n="project-title-2">MINISOCIAL</h4>
-                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-2">Java / WildFly / ActiveMQ JMS</span>
-              </div>
-              <p class="muted mt-3 small" data-i18n="project-desc-2">
-                A message-driven social infrastructure backplane utilizing WildFly application servers and decoupled message queues.
-              </p>
-              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-2">[ Architectural Decisions ]</strong>
-                <ul class="small muted ps-3 mt-2 mb-0">
-                  <li data-i18n="project-decisions-li1-2">JMS notification system utilizing ActiveMQ standalone-MINISOC topic routines for event processing.</li>
-                  <li data-i18n="project-decisions-li2-2">Manual JBoss connection configurations to support high-throughput message publishing.</li>
-                  <li data-i18n="project-decisions-li3-2">Decoupled listener patterns isolating real-time system alerts from primary client requests.</li>
-                </ul>
-              </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/MINISOCIAL" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-2">Review Structural Codebase</span></a>
-            </div>
-          </div>
-
-          <!-- Booking Project -->
-          <div class="col-12">
-            <div class="card-panel p-4">
-              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0" data-i18n="project-title-3">Booking</h4>
-                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-3">Java / Maven / Reservation Core</span>
-              </div>
-              <p class="muted mt-3 small" data-i18n="project-desc-3">
-                A Java-based resource management and reservation system with secure user authentication and scheduling validation.
-              </p>
-              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-3">[ Architectural Decisions ]</strong>
-                <ul class="small muted ps-3 mt-2 mb-0">
-                  <li data-i18n="project-decisions-li1-3">Modular Maven project structure decoupling resource endpoints from test routines.</li>
-                  <li data-i18n="project-decisions-li2-3">Strict user login and session authentication system protecting private dashboard API states.</li>
-                  <li data-i18n="project-decisions-li3-3">Comprehensive endpoint integration coverage validated using Postman test collections.</li>
-                </ul>
-              </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Booking" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-3">Review Structural Codebase</span></a>
-            </div>
-          </div>
-
-          <!-- Event-Planner Project -->
-          <div class="col-12">
-            <div class="card-panel p-4">
-              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h4 class="fw-bold mb-0" data-i18n="project-title-4">Event-Planner</h4>
-                <span class="badge custom-badge border border-secondary p-2" data-i18n="project-badge-4">Go / React / Nginx / Docker Compose</span>
-              </div>
-              <p class="muted mt-3 small" data-i18n="project-desc-4">
-                A fully containerized multi-service platform for event planning, deployed using modern virtualization standards.
-              </p>
-              <div class="p-3 my-3" style="background: var(--panel-inner); border-radius: 6px;">
-                <strong style="color: var(--accent); font-size: var(--fs-xs);" data-i18n="project-decisions-title-4">[ Architectural Decisions ]</strong>
-                <ul class="small muted ps-3 mt-2 mb-0">
-                  <li data-i18n="project-decisions-li1-4">Containerized bridge network linking a Go API, React + Vite frontend, and a MySQL database.</li>
-                  <li data-i18n="project-decisions-li2-4">Optimized Alpine-based micro-images reducing deploy footprint (Backend: ~15MB, Frontend: ~25MB).</li>
-                  <li data-i18n="project-decisions-li3-4">Production-ready Nginx static asset routing configured with optimized browser caching layers.</li>
-                </ul>
-              </div>
-              <a class="btn btn-sm btn-outline-light" href="https://github.com/MsqJR/Event-Planner" target="_blank" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);"><i class="fa-brands fa-github me-1"></i> <span data-i18n="project-btn-4">Review Structural Codebase</span></a>
-            </div>
+          <div class="console-controls">
+            <span class="c-dot c-red"></span>
+            <span class="c-dot c-yellow"></span>
+            <span class="c-dot c-green"></span>
           </div>
         </div>
-      </div>
-      
-      <!-- Specifications Column -->
-      <div class="col-lg-4">
-        <div class="card-panel p-4 mb-4">
-          <h4 class="h5 mb-3" data-i18n="specs-title">System Specifications</h4>
-          <div class="small">
-            <span class="muted d-block mb-1" data-i18n="specs-label-1">Rigid Standards:</span>
-            <div class="fw-bold mb-3"><i class="fa-solid fa-certificate me-1" style="color: var(--accent-2)"></i> <span data-i18n="specs-val-1">ISTQB Certified Tester (CTFL)</span></div>
-            <span class="muted d-block mb-1" data-i18n="specs-label-2">Production Experience:</span>
-            <div class="fw-bold mb-3"><i class="fa-solid fa-briefcase me-1 text-info"></i> <span data-i18n="specs-val-2">Backend Developer Intern — GB Corp</span></div>
-            <span class="muted d-block mb-1" data-i18n="specs-label-3">Foundational Track:</span>
-            <div class="fw-bold" data-i18n="specs-val-3">B.Sc. in Software Engineering<br><span class="muted fw-normal text-sm">Cairo University (FCAI)</span></div>
+        <div class="console-body">
+          <div class="hero-kicker">
+            <i class="fa-solid fa-check-double"></i> 3+ YEARS EXP | ISTQB CTFL CERTIFIED | 15+ DELIVERED PROJECTS
           </div>
-        </div>
-
-        <div class="card-panel p-4">
-          <h4 class="h5 mb-3" data-i18n="stack-title">Validated Production Stack</h4>
-          <div class="d-flex flex-wrap gap-1">
-            <span class="skill-pill"><i class="fa-solid fa-code me-1"></i> .NET Core / C#</span>
-            <span class="skill-pill"><i class="fa-brands fa-golang me-1"></i> Go (Golang)</span>
-            <span class="skill-pill"><i class="fa-brands fa-java me-1"></i> Java Spring Boot</span>
-            <span class="skill-pill"><i class="fa-brands fa-python me-1"></i> Python Django / DRF</span>
-            <span class="skill-pill"><i class="fa-solid fa-database me-1"></i> SQL Server / Postgres</span>
-            <span class="skill-pill"><i class="fa-brands fa-linux me-1"></i> Advanced Linux / VPS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 4: CONTACT -->
-  <section id="contact" class="scroll-margin" style="scroll-margin-top: 100px;">
-    <div class="card-panel p-4">
-      <div class="row g-4 align-items-start">
-        <div class="col-md-5">
-          <h4 class="fw-bold" data-i18n="contact-title">Book a System Audit</h4>
-          <p class="muted small mb-3" data-i18n="contact-desc">
-            Submit your system requirements or stack bottlenecks. Whether you need a full website built on the latest tech or have a tight deadline, I will deliver exactly what you want.
+          <h1 class="hero-title">
+            High-Performance Web Platforms, <span>Custom Dashboards</span> & Zero-Debt Infrastructure.
+          </h1>
+          <p class="hero-lead">
+            I engineer production-grade backend engines, bespoke portfolio sites, enterprise admin portals, and automated VPS hosting environments. Built for employers demanding scalable code and clients needing high-uptime reliability.
           </p>
-          <div class="info-block mb-3">
-            <div class="small fw-bold text-white mb-2"><i class="fa-solid fa-circle-info me-1" style="color: var(--accent-2)"></i> <span data-i18n="contact-info-title">What happens next?</span></div>
-            <div class="small muted" data-i18n="contact-info-li1">1. Manual log evaluation within 24 hours.</div>
-            <div class="small muted" data-i18n="contact-info-li2">2. You receive a direct structural feedback blueprint via mail.</div>
-          </div>
-          <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-outline-light px-3" href="assets/resume.pdf" style="color: var(--text); border-color: var(--border); font-size: var(--fs-xs);" download><i class="fa-solid fa-file-pdf me-1"></i> <span data-i18n="contact-resume">Technical Resume</span></a>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="switchView('audit')">
+              <i class="fa-solid fa-paper-plane"></i> Book Free Architecture Review
+            </button>
+            <button class="btn btn-secondary" onclick="switchView('projects')">
+              <i class="fa-solid fa-code-branch"></i> Review Structural Projects
+            </button>
           </div>
         </div>
-        <div class="col-md-7">
-          <form id="contactForm" class="row g-2">
-            <div class="col-md-6">
-              <input class="form-control" type="text" placeholder="Identity / Company Name" id="name" required>
+      </div>
+
+      <!-- Verified Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-num">3+</div>
+          <div class="metric-label">Years Software Engineering Experience</div>
+        </div>
+        <div class="metric-card" style="border-left-color: var(--accent-green);">
+          <div class="metric-num" style="color: var(--accent-green);">15+</div>
+          <div class="metric-label">Completed Client & Enterprise Projects</div>
+        </div>
+        <div class="metric-card" style="border-left-color: var(--accent-blue);">
+          <div class="metric-num" style="color: var(--accent-blue);">ISTQB</div>
+          <div class="metric-label">Certified Tester Credentials (CTFL)</div>
+        </div>
+        <div class="metric-card" style="border-left-color: var(--accent-yellow);">
+          <div class="metric-num" style="color: var(--accent-yellow);">100%</div>
+          <div class="metric-label">Zero Technical Debt Guarantee</div>
+        </div>
+      </div>
+
+      <!-- Core Value & Positioning Console -->
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title"><i class="fa-solid fa-terminal" style="color: var(--accent-green);"></i> Architectural Guarantee</div>
+        </div>
+        <div class="console-body">
+          <h3 style="font-family: var(--font-sans); margin-bottom: 0.75rem; font-size: 1.25rem;">
+            Why Backend Precision Bounds Frontend Speed
+          </h3>
+          <p style="color: var(--muted); margin-bottom: 1rem;">
+            Slow loading states, unhandled edge cases, and unexpected server failures cost businesses clients and waste developer hours. My engineering workflow combines rigorous ISTQB test suites with optimized database queries and isolated VPS hosting to guarantee high-performance execution.
+          </p>
+          <div style="background: var(--code-bg); padding: 1rem; border-left: 3px solid var(--accent-green); font-size: 0.9rem;">
+            <code>// System Telemetry Verification Log<br>
+            [STATUS] Database Query Latency: &lt; 14ms (P99)<br>
+            [STATUS] ISTQB CTFL Validation Pass: 100%<br>
+            [STATUS] VPS Deployment Isolation: Docker Containerized</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: SERVICES & ESTIMATOR -->
+    <section id="view-services" class="view-section">
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title"><i class="fa-solid fa-cubes" style="color: var(--accent);"></i> Engineering Service Tracks</div>
+        </div>
+        <div class="console-body">
+          <h2 style="font-family: var(--font-sans); font-size: var(--fs-xl); margin-bottom: 0.5rem;">
+            Tailored Engineering for Businesses & Hiring Teams
+          </h2>
+          <p style="color: var(--muted); max-width: 750px;">
+            Whether you need a sleek portfolio, a complex enterprise dashboard, or high-uptime hosting, each track delivers test-driven code and complete system ownership.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 Service Track Cards -->
+      <div class="services-grid">
+        <!-- Track 1 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3 class="service-title">Bespoke Portfolio & Web Solutions</h3>
+            <p class="service-desc">
+              Custom-built responsive websites with ultra-fast page load times, Gruvbox/modern aesthetics, SEO optimization, and accessible typography.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag">HTML5 / CSS3</span>
+            <span class="tag">Vanilla JS</span>
+            <span class="tag">SEO Best Practices</span>
+            <span class="tag">WCAG AA</span>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="service-title">Enterprise Web Apps & Dashboards</h3>
+            <p class="service-desc">
+              Robust management dashboards featuring complex API integrations, role-based access control, real-time analytics, and ISTQB-validated business logic.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag">Management Dashboards</span>
+            <span class="tag">API Integration</span>
+            <span class="tag">ISTQB CTFL</span>
+            <span class="tag">Role-Based Security</span>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="service-card">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-server"></i></div>
+            <h3 class="service-title">Web Hosting & VPS Cloud Setup</h3>
+            <p class="service-desc">
+              Isolated VPS server deployments, Nginx reverse proxy configuration, Docker containerization, automated SSL renewals, and automated backup pipelines.
+            </p>
+          </div>
+          <div class="service-tags">
+            <span class="tag">VPS Cloud Deployment</span>
+            <span class="tag">Docker / Nginx</span>
+            <span class="tag">Zero-Downtime</span>
+            <span class="tag">Automated Backups</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Estimator & System Calculator -->
+      <div class="estimator-box">
+        <h3 style="font-family: var(--font-sans); margin-bottom: 0.5rem; font-size: 1.25rem;">
+          <i class="fa-solid fa-calculator" style="color: var(--accent-green);"></i> Interactive Service Estimator
+        </h3>
+        <p style="color: var(--muted); font-size: 0.9rem;">
+          Select your project requirements to calculate estimated architecture parameters and deployment SLA.
+        </p>
+
+        <div class="estimator-controls">
+          <div class="form-group">
+            <label for="est-type">Service Category:</label>
+            <select id="est-type" onchange="updateEstimator()">
+              <option value="portfolio">Bespoke Portfolio / Business Site</option>
+              <option value="dashboard" selected>Enterprise App + Management Dashboard</option>
+              <option value="vps">Web Hosting & VPS Deployment</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="est-scale">Expected Traffic / Scale:</label>
+            <select id="est-scale" onchange="updateEstimator()">
+              <option value="small">Low / Regional Traffic (&lt; 10k visits/mo)</option>
+              <option value="medium" selected>Moderate Growth (10k - 100k visits/mo)</option>
+              <option value="enterprise">High Throughput / Enterprise (&gt; 100k visits/mo)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="estimator-result" id="est-output">
+          <strong>Recommended Stack:</strong> Node.js / Python REST API + Dashboard UI + Docker VPS Deployment<br>
+          <strong>Validation Standard:</strong> ISTQB Integration & E2E Test Suite<br>
+          <strong>Estimated Delivery SLA:</strong> 2 - 3 Weeks (Includes Architectural Code Audit)
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: PROJECTS & PROOF -->
+    <section id="view-projects" class="view-section">
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title"><i class="fa-solid fa-code-branch" style="color: var(--accent);"></i> Structural Project Repositories</div>
+        </div>
+        <div class="console-body">
+          <h2 style="font-family: var(--font-sans); font-size: var(--fs-xl); margin-bottom: 0.5rem;">
+            Featured Structural Systems & Architecture
+          </h2>
+          <p style="color: var(--muted); max-width: 750px; margin-bottom: 1.5rem;">
+            Explore the core architectural decisions, decoupling strategies, and codebase repositories built across 3+ years of engineering experience.
+          </p>
+
+          <div class="projects-grid">
+            
+            <!-- PROJECT 1: MEDIFY -->
+            <div class="project-card">
+              <div class="project-header">
+                <div>
+                  <h3 class="project-title">Medify</h3>
+                </div>
+                <span class="stack-badge">TypeScript / Next.js / Django</span>
+              </div>
+              <p style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text);">
+                Medical SaaS featuring clinic subdomains, storefronts, appointment scheduling, and AI assistants.
+              </p>
+              
+              <div class="arch-decisions-box">
+                <div class="arch-decisions-title">[ Architectural Decisions ]</div>
+                <ul class="arch-decisions-list">
+                  <li>Multi-tenant routing for clinic-specific subdomains.</li>
+                  <li>Fast Next.js frontend with a Django REST API.</li>
+                  <li>Async scheduling system with AI assistants.</li>
+                </ul>
+              </div>
+
+              <a href="https://github.com/markmounir" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.88rem;">
+                <i class="fa-brands fa-github"></i> Review Structural Codebase
+              </a>
             </div>
-            <div class="col-md-6">
-              <input class="form-control" type="email" placeholder="Endpoint Email Address" id="email" required>
+
+            <!-- PROJECT 2: MINISOCIAL -->
+            <div class="project-card">
+              <div class="project-header">
+                <div>
+                  <h3 class="project-title">MINISOCIAL</h3>
+                </div>
+                <span class="stack-badge">Java / WildFly / ActiveMQ JMS</span>
+              </div>
+              <p style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text);">
+                Decoupled social network backend using WildFly servers and ActiveMQ JMS messaging.
+              </p>
+              
+              <div class="arch-decisions-box">
+                <div class="arch-decisions-title">[ Architectural Decisions ]</div>
+                <ul class="arch-decisions-list">
+                  <li>ActiveMQ JMS topic handling for async notifications.</li>
+                  <li>Custom JBoss configs for high message throughput.</li>
+                  <li>Decoupled listeners to isolate alerts from request flows.</li>
+                </ul>
+              </div>
+
+              <a href="https://github.com/markmounir" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.88rem;">
+                <i class="fa-brands fa-github"></i> Review Structural Codebase
+              </a>
             </div>
-            <div class="col-12">
-              <select class="form-select" id="projectTrack" required>
-                <!-- populated dynamically -->
+
+            <!-- PROJECT 3: BOOKING -->
+            <div class="project-card">
+              <div class="project-header">
+                <div>
+                  <h3 class="project-title">Booking</h3>
+                </div>
+                <span class="stack-badge">Java / Maven / Reservation Core</span>
+              </div>
+              <p style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text);">
+                Java resource allocation and booking engine with authentication and Postman test coverage.
+              </p>
+              
+              <div class="arch-decisions-box">
+                <div class="arch-decisions-title">[ Architectural Decisions ]</div>
+                <ul class="arch-decisions-list">
+                  <li>Modular Maven structure separating endpoints from tests.</li>
+                  <li>Secure session authentication for dashboard API states.</li>
+                  <li>Endpoint routing validated via Postman test collections.</li>
+                </ul>
+              </div>
+
+              <a href="https://github.com/markmounir" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.88rem;">
+                <i class="fa-brands fa-github"></i> Review Structural Codebase
+              </a>
+            </div>
+
+            <!-- PROJECT 4: EVENT-PLANNER -->
+            <div class="project-card">
+              <div class="project-header">
+                <div>
+                  <h3 class="project-title">Event-Planner</h3>
+                </div>
+                <span class="stack-badge">Go / React / Nginx / Docker Compose</span>
+              </div>
+              <p style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text);">
+                Containerized multi-service stack with a Go API, React frontend, MySQL, and Nginx.
+              </p>
+              
+              <div class="arch-decisions-box">
+                <div class="arch-decisions-title">[ Architectural Decisions ]</div>
+                <ul class="arch-decisions-list">
+                  <li>Docker bridge network linking Go, React, and MySQL.</li>
+                  <li>Micro Alpine images reducing build size (15MB backend).</li>
+                  <li>Nginx static routing with optimized caching layers.</li>
+                </ul>
+              </div>
+
+              <a href="https://github.com/markmounir" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 0.45rem 0.9rem; font-size: 0.88rem;">
+                <i class="fa-brands fa-github"></i> Review Structural Codebase
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Credentials Table -->
+          <div class="console-box" style="margin-top: 2rem; margin-bottom: 0;">
+            <div class="console-header">
+              <div class="console-title"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-yellow);"></i> Degrees & Formal Certifications</div>
+            </div>
+            <div class="console-body" style="padding: 1rem;">
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li style="display: flex; gap: 0.75rem; align-items: center;">
+                  <i class="fa-solid fa-award" style="color: var(--accent-green);"></i>
+                  <div>
+                    <strong>B.Sc. in Software Engineering</strong> — Cairo University (FCAI)
+                  </div>
+                </li>
+                <li style="display: flex; gap: 0.75rem; align-items: center;">
+                  <i class="fa-solid fa-certificate" style="color: var(--accent);"></i>
+                  <div>
+                    <strong>ISTQB Certified Tester (CTFL)</strong> — International Software Testing Qualifications Board
+                  </div>
+                </li>
+                <li style="display: flex; gap: 0.75rem; align-items: center;">
+                  <i class="fa-solid fa-building" style="color: var(--accent-blue);"></i>
+                  <div>
+                    <strong>Backend Developer Intern</strong> — GB Corp (Internal Service Pipelines & Query Refactoring)
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: FREE AUDIT & CONTACT -->
+    <section id="view-audit" class="view-section">
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title"><i class="fa-solid fa-shield-halved" style="color: var(--accent-green);"></i> Book Free Architecture Review</div>
+        </div>
+        <div class="console-body">
+          <h2 style="font-family: var(--font-sans); font-size: var(--fs-xl); margin-bottom: 0.5rem;">
+            Get a Free Architectural System Audit & Project Quote
+          </h2>
+          <p style="color: var(--muted); max-width: 750px; margin-bottom: 1.5rem;">
+            Whether you are hiring a full-time backend engineer or need a high-performance web platform built from scratch, submit your project details for a complimentary 24-hour architectural evaluation.
+          </p>
+
+          <form id="audit-form" onsubmit="handleAuditSubmit(event)">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="audit-name">Your Name / Organization *</label>
+                <input type="text" id="audit-name" required placeholder="e.g. Sarah / TechCorp">
+              </div>
+              <div class="form-group">
+                <label for="audit-email">Work Email *</label>
+                <input type="email" id="audit-email" required placeholder="name@company.com">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label for="audit-track">Primary Requirement *</label>
+              <select id="audit-track">
+                <option value="hiring">Full-Time / Contract Engineering Role</option>
+                <option value="portfolio">Bespoke Portfolio / Business Website</option>
+                <option value="dashboard">Enterprise Web Platform & Management Dashboard</option>
+                <option value="vps">Web Hosting & VPS Cloud Deployment</option>
               </select>
             </div>
-            <div class="col-12">
-              <textarea class="form-control" id="message" rows="4" placeholder="Briefly describe your current stack bottlenecks..." required></textarea>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label for="audit-details">Project Description / System Challenges *</label>
+              <textarea id="audit-details" rows="4" required placeholder="Describe your current tech stack, performance bottlenecks, or desired web features..."></textarea>
             </div>
-            <div class="col-12 text-end">
-              <button class="btn cta px-4" type="submit" data-i18n="contact-btn-submit">Submit Parameters</button>
-            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-paper-plane"></i> Submit Request for Architectural Audit
+            </button>
           </form>
-          <div id="formAlert" class="mt-2 text-sm" style="display:none; font-family: monospace;"></div>
+
+          <div id="audit-success" style="display: none; margin-top: 1.5rem; padding: 1.25rem; background: rgba(184, 187, 38, 0.15); border: 1px solid var(--accent-green); border-radius: 4px; color: var(--accent-green);">
+            <i class="fa-solid fa-circle-check"></i> Audit Request Received! I will review your specifications and reply via email within 24 hours.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CLI Prompt Modal Overlay -->
+  <div class="cli-modal" id="cli-modal" onclick="if(event.target === this) toggleCliModal()">
+    <div class="cli-container">
+      <div class="console-header">
+        <div class="console-title"><i class="fa-solid fa-terminal" style="color: var(--accent-green);"></i> Interactive Portfolio Terminal (Type 'help')</div>
+        <button onclick="toggleCliModal()" style="background: transparent; border: none; color: var(--text); cursor: pointer; font-size: 1.1rem;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="cli-output" id="cli-output">
+        <div class="cli-line">Mark Mounir Portfolio Terminal [v3.4.0]</div>
+        <div class="cli-line" style="color: var(--accent-green);">[SYSTEM INITIALIZED] Available Commands:</div>
+        <div class="cli-line">--------------------------------------------------</div>
+        <div class="cli-line"><span style="color: var(--accent);">overview</span> (or home)  - Navigate to Overview view</div>
+        <div class="cli-line"><span style="color: var(--accent);">services</span>            - View Services & Interactive Estimator</div>
+        <div class="cli-line"><span style="color: var(--accent);">projects</span> (or proof)  - Inspect Structural Projects & Repos</div>
+        <div class="cli-line"><span style="color: var(--accent);">audit</span> (or contact)   - Book Free Architecture Review</div>
+        <div class="cli-line"><span style="color: var(--accent);">experience</span>          - Display credentials & metrics summary</div>
+        <div class="cli-line"><span style="color: var(--accent);">theme</span>               - Toggle Dark / Light theme</div>
+        <div class="cli-line"><span style="color: var(--accent);">clear</span>               - Clear terminal screen</div>
+        <div class="cli-line"><span style="color: var(--accent);">exit</span>               - exit terminal screen</div>
+        <div class="cli-line">--------------------------------------------------</div>
+      </div>
+      <div class="cli-prompt-line">
+        <span class="cli-prompt-symbol">guest@markmounir:~$</span>
+        <input type="text" class="cli-input" id="cli-input" placeholder="type a command..." onkeydown="handleCliInput(event)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal Drawer (YouTube Style) -->
+  <div class="cli-modal" id="shortcuts-modal" onclick="if(event.target === this) toggleShortcutsModal()">
+    <div class="cli-container" style="max-width: 640px;">
+      <div class="console-header">
+        <div class="console-title"><i class="fa-solid fa-keyboard" style="color: var(--accent-yellow);"></i> Keyboard Navigation Shortcuts</div>
+        <button onclick="toggleShortcutsModal()" style="background: transparent; border: none; color: var(--text); cursor: pointer; font-size: 1.1rem;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="console-body" style="padding: 1.25rem;">
+        <div class="shortcuts-grid">
+          <div>
+            <h4 style="font-family: var(--font-sans); color: var(--accent-green); margin-bottom: 0.75rem; font-size: 0.95rem;">
+              <i class="fa-solid fa-compass"></i> Page Navigation
+            </h4>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Overview / Home</span>
+              <div class="shortcut-keys"><kbd>1</kbd> or <kbd>g</kbd> <kbd>h</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Services & Estimator</span>
+              <div class="shortcut-keys"><kbd>2</kbd> or <kbd>g</kbd> <kbd>s</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Structural Projects</span>
+              <div class="shortcut-keys"><kbd>3</kbd> or <kbd>g</kbd> <kbd>p</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Free Audit / Contact</span>
+              <div class="shortcut-keys"><kbd>4</kbd> or <kbd>g</kbd> <kbd>a</kbd></div>
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-family: var(--font-sans); color: var(--accent); margin-bottom: 0.75rem; font-size: 0.95rem;">
+              <i class="fa-solid fa-sliders"></i> Actions & Controls
+            </h4>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Shortcuts Cheatsheet</span>
+              <div class="shortcut-keys"><kbd>?</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Interactive CLI Drawer</span>
+              <div class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>/</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Toggle Dark / Light Theme</span>
+              <div class="shortcut-keys"><kbd>t</kbd></div>
+            </div>
+            <div class="shortcut-row">
+              <span class="shortcut-label">Close Open Modals</span>
+              <div class="shortcut-keys"><kbd>Esc</kbd></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-</main>
-
-<footer class="container-xl mb-4 text-center">
-  <div class="muted small d-flex justify-content-between flex-wrap gap-2 px-2">
-    <div data-i18n="footer-copy">&copy; 2026 Mark Mounir. All operational rights reserved.</div>
-    <div><i class="fa-solid fa-circle" style="color: var(--accent-2); font-size: 0.75rem;"></i> <span data-i18n="footer-status">System Status: Operational</span></div>
   </div>
-</footer>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-  (function() {
-    // Internationalization dictionary
-    const i18n = {
-      en: {
-        "nav-title": "Mark Mounir",
-        "nav-subtitle": "Backend & Systems Architect",
-        "nav-console": "[01_console]",
-        "nav-services": "[02_services]",
-        "nav-logs": "[03_logs]",
-        "nav-contact": "[04_audit]",
-        "status-indicator": "Accepting US & Global VPS / Backend Contracts",
-        "hero-title": "High-Speed Websites & Complete Systems. Built to Scale, Delivered on Time.",
-        "hero-desc": "Software Engineer crafting high-performance full websites and systems under tight deadlines. Powered by modern, high-speed stacks.",
-        "hero-cta-audit": "Book a Free Architecture Review",
-        "hero-cta-services": "View Service Pipelines",
-        "guarantee-title": "The Technical Guarantee",
-        "guarantee-bold": "Rigorous Engineering:",
-        "guarantee-desc": "Production-ready systems in Go, .NET Core, Spring Boot, and Django. Optimized for execution speed and test coverage.",
-        
-        "services-title": "Services & Architectural Solutions",
-        "services-desc": "Highly optimized technical offerings designed for execution speed, system safety, and custom business requirements.",
-        
-        "service-tag-1": "[ Full-Stack Development ]",
-        "service-title-1": "Full-Stack Website & System Engineering",
-        "service-desc-1": "End-to-end web apps and backend services. Built in .NET, Go, or Java for immediate scalability.",
-        "service-highlight-1": "Fast Delivery Guarantee",
-        
-        "service-tag-2": "[ DevOps & Cloud VPS ]",
-        "service-title-2": "High-Speed VPS Infrastructure & Deployment",
-        "service-desc-2": "Secure Linux VPS setups with firewalls, application isolation, and logging for maximum speed.",
-        "service-highlight-2": "Built on Latest Tech",
-        
-        "service-tag-3": "[ Backend APIs & Databases ]",
-        "service-title-3": "Backend API Development & Query Optimization",
-        "service-desc-3": "Optimize slow APIs, database queries, and code bottleneck points to meet tight deadlines.",
-        "service-highlight-3": "Tight Deadline Readiness",
-        
-        "logs-title": "Production Blueprint Validations",
-        "logs-desc": "Deep architecture summaries detailing technical choices made to guarantee high system stability.",
-        
-        "project-title-1": "Medify",
-        "project-badge-1": "TypeScript / Next.js / Django",
-        "project-desc-1": "Medical SaaS featuring clinic subdomains, storefronts, appointment scheduling, and AI assistants.",
-        "project-decisions-title-1": "[ Architectural Decisions ]",
-        "project-decisions-li1-1": "Multi-tenant routing for clinic-specific subdomains.",
-        "project-decisions-li2-1": "Fast Next.js frontend with a Django REST API.",
-        "project-decisions-li3-1": "Async scheduling system with AI assistants.",
-        "project-btn-1": "Review Structural Codebase",
-        
-        "project-title-2": "MINISOCIAL",
-        "project-badge-2": "Java / WildFly / ActiveMQ JMS",
-        "project-desc-2": "Decoupled social network backend using WildFly servers and ActiveMQ JMS messaging.",
-        "project-decisions-title-2": "[ Architectural Decisions ]",
-        "project-decisions-li1-2": "ActiveMQ JMS topic handling for async notifications.",
-        "project-decisions-li2-2": "Custom JBoss configs for high message throughput.",
-        "project-decisions-li3-2": "Decoupled listeners to isolate alerts from request flows.",
-        "project-btn-2": "Review Structural Codebase",
-        
-        "project-title-3": "Booking",
-        "project-badge-3": "Java / Maven / Reservation Core",
-        "project-desc-3": "Java resource allocation and booking engine with authentication and Postman test coverage.",
-        "project-decisions-title-3": "[ Architectural Decisions ]",
-        "project-decisions-li1-3": "Modular Maven structure separating endpoints from tests.",
-        "project-decisions-li2-3": "Secure session authentication for dashboard API states.",
-        "project-decisions-li3-3": "Endpoint routing validated via Postman test collections.",
-        "project-btn-3": "Review Structural Codebase",
-        
-        "project-title-4": "Event-Planner",
-        "project-badge-4": "Go / React / Nginx / Docker Compose",
-        "project-desc-4": "Containerized multi-service stack with a Go API, React frontend, MySQL, and Nginx.",
-        "project-decisions-title-4": "[ Architectural Decisions ]",
-        "project-decisions-li1-4": "Docker bridge network linking Go, React, and MySQL.",
-        "project-decisions-li2-4": "Micro Alpine images reducing build size (15MB backend).",
-        "project-decisions-li3-4": "Nginx static routing with optimized caching layers.",
-        "project-btn-4": "Review Structural Codebase",
-        
-        "specs-title": "System Specifications",
-        "specs-label-1": "Rigid Standards:",
-        "specs-val-1": "ISTQB Certified Tester (CTFL)",
-        "specs-label-2": "Production Experience:",
-        "specs-val-2": "Backend Developer Intern — GB Corp",
-        "specs-label-3": "Foundational Track:",
-        "specs-val-3": "B.Sc. in Software Engineering<br><span class=\"muted fw-normal text-sm\">Cairo University (FCAI)</span>",
-        "stack-title": "Validated Production Stack",
-        
-        "contact-title": "Book a System Audit",
-        "contact-desc": "Submit your system requirements or stack bottlenecks. Whether you need a full website built on the latest tech or have a tight deadline, I will deliver exactly what you want.",
-        "contact-info-title": "What happens next?",
-        "contact-info-li1": "1. Manual log evaluation within 24 hours.",
-        "contact-info-li2": "2. You receive a direct structural feedback blueprint via mail.",
-        "contact-resume": "Technical Resume",
-        "contact-btn-submit": "Submit Parameters",
-        
-        "footer-copy": "&copy; 2026 Youssef Samwel. All operational rights reserved.",
-        "footer-status": "System Status: Operational",
-        
-        // Form specific texts
-        "placeholder-name": "Identity / Company Name",
-        "placeholder-email": "Endpoint Email Address",
-        "placeholder-msg": "Briefly describe your current stack bottlenecks or project goal parameters...",
-        "select-default": "Select System Target Engagement",
-        "select-opt1": "Full MVP Engine Architecture Build (~4-6 Weeks)",
-        "select-opt2": "Isolated VPS Infrastructure Deployment",
-        "select-opt3": "Database Optimization & Logic Refactoring",
-        "select-opt4": "Other Custom Backend Logic Block"
-      },
-      ar: {
-        "nav-title": "Mark Mounir",
-        "nav-subtitle": "Backend & Systems Architect",
-        "nav-console": "[01_الكونسول]",
-        "nav-services": "[02_الخدمات]",
-        "nav-logs": "[03_السجلات]",
-        "nav-contact": "[04_التدقيق]",
-        "status-indicator": "متاح للتعاقدات الخارجية والمحلية للبنى التحتية و backend",
-        "hero-title": "مواقع ويب سريعة وأنظمة متكاملة. مصممة للنمو، وتُسلم في الوقت المحدد.",
-        "hero-desc": "مهندس برمجيات لتطوير مواقع ويب وأنظمة backend عالية الأداء تحت مواعيد تسليم ضيقة وبأسرع التقنيات الحديثة.",
-        "hero-cta-audit": "احجز مراجعة مجانية للبنية التحتية",
-        "hero-cta-services": "عرض مسارات الخدمات",
-        "guarantee-title": "الضمان التقني",
-        "guarantee-bold": "هندسة صارمة:",
-        "guarantee-desc": "أنظمة جاهزة للإنتاج باستخدام Go و .NET Core و Spring Boot و Django. محسنة لسرعة التنفيذ والتغطية الاختبارية.",
-        
-        "services-title": "الخدمات والحلول المعمارية",
-        "services-desc": "عروض تقنية محسنة ومصممة خصيصاً لسرعة التنفيذ وأمان النظام ومتطلبات الأعمال المخصصة.",
-        
-        "service-tag-1": "[ تطوير الويب المتكامل ]",
-        "service-title-1": "هندسة وتطوير مواقع الويب والأنظمة الكاملة",
-        "service-desc-1": "تطوير تطبيقات ويب وأنظمة backend متكاملة بـ .NET أو Go أو Java قابلة للتوسع الفوري.",
-        "service-highlight-1": "ضمان التسليم السريع",
-        
-        "service-tag-2": "[ إدارة العمليات والبنية التحتية ]",
-        "service-title-2": "بناء ونشر البنية التحتية لخوادم VPS عالية السرعة",
-        "service-desc-2": "إعداد خوادم Linux VPS آمنة مع جدران حماية وعزل للتطبيقات وسجلات نظام لأقصى سرعة.",
-        "service-highlight-2": "مبني على أحدث التقنيات",
-        
-        "service-tag-3": "[ أنظمة backend وقواعد البيانات ]",
-        "service-title-3": "تطوير واجهات برمجة backend وتحسين الاستعلامات",
-        "service-desc-3": "تحسين واجهات البرمجة واستعلامات قواعد البيانات وحل مشاكل الأداء البرمجي في أسرع وقت.",
-        "service-highlight-3": "جاهزية لمواعيد التسليم الضيقة",
-        
-        "logs-title": "توثيق وبراهين النظم الفعلية",
-        "logs-desc": "ملخصات معمارية عميقة توضح القرارات التقنية التي اتخذت لضمان ثبات واستقرار النظام العالي.",
-        
-        "project-title-1": "Medify",
-        "project-badge-1": "TypeScript / Next.js / Django",
-        "project-desc-1": "منصة طبية تدعم نطاقات فرعية، ومتاجر إلكترونية، وجدولة مواعيد ومساعدين ذكاء اصطناعي.",
-        "project-decisions-title-1": "[ القرارات المعمارية ]",
-        "project-decisions-li1-1": "توجيه متعدد المستأجرين لنطاقات العيادات الفرعية.",
-        "project-decisions-li2-1": "واجهة Next.js سريعة مع backend بـ Django REST API.",
-        "project-decisions-li3-1": "جدولة مواعيد غير متزامنة مدمجة مع مساعدي الذكاء الاصطناعي.",
-        "project-btn-1": "مراجعة الهيكل البرمجي للمشروع",
-        
-        "project-title-2": "MINISOCIAL",
-        "project-badge-2": "Java / WildFly / ActiveMQ JMS",
-        "project-desc-2": "نظام backend لشبكة اجتماعية يعتمد على خوادم WildFly ورسائل JMS عبر ActiveMQ.",
-        "project-decisions-title-2": "[ القرارات المعمارية ]",
-        "project-decisions-li1-2": "معالجة ActiveMQ JMS لإشعارات غير متزامنة.",
-        "project-decisions-li2-2": "إعدادات اتصالات مخصصة لإنتاجية رسائل عالية.",
-        "project-decisions-li3-2": "مستمعات معزولة لعزل التنبيهات عن تدفق الطلبات.",
-        "project-btn-2": "مراجعة الهيكل البرمجي للمشروع",
-        
-        "project-title-3": "Booking",
-        "project-badge-3": "Java / Maven / Reservation Core",
-        "project-desc-3": "نظام حجز موارد بجافا مع مصادقة مستخدمين وتغطية كاملة لاختبارات Postman.",
-        "project-decisions-title-3": "[ القرارات المعمارية ]",
-        "project-decisions-li1-3": "هيكل Maven مجزأ يفصل بين نقاط النهاية والاختبارات.",
-        "project-decisions-li2-3": "مصادقة جلسات آمنة لواجهات برمجة لوحة التحكم.",
-        "project-decisions-li3-3": "التحقق من صحة مسارات واجهات البرمجة عبر Postman.",
-        "project-btn-3": "مراجعة الهيكل البرمجي للمشروع",
-        
-        "project-title-4": "Event-Planner",
-        "project-badge-4": "Go / React / Nginx / Docker Compose",
-        "project-desc-4": "بنية خدمات محواة بالكامل تضم Go API وواجهة React وقاعدة MySQL وخادم Nginx.",
-        "project-decisions-title-4": "[ القرارات المعمارية ]",
-        "project-decisions-li1-4": "شبكة Docker داخلية تربط Go و React و MySQL.",
-        "project-decisions-li2-4": "حاويات Alpine مصغرة لتقليل حجم البناء (خلفية 15MB).",
-        "project-decisions-li3-4": "توجيه Nginx للملفات الساكنة مع تخزين مؤقت محسن.",
-        "project-btn-4": "مراجعة الهيكل البرمجي للمشروع",
-        
-        "specs-title": "مواصفات وخبرات المهندس",
-        "specs-label-1": "المعايير المتبعة:",
-        "specs-val-1": "فاحص معتمد دولياً من ISTQB (CTFL)",
-        "specs-label-2": "الخبرة العملية:",
-        "specs-val-2": "متدرب تطوير backend — شركة جي بي كورب",
-        "specs-label-3": "الدراسة الأكاديمية:",
-        "specs-val-3": "بكالوريوس هندسة البرمجيات<br><span class=\"muted fw-normal text-sm\">جامعة القاهرة (FCAI)</span>",
-        "stack-title": "البنية التقنية المعتمدة",
-        
-        "contact-title": "احجز جلسة تدقيق للنظام",
-        "contact-desc": "أرسل متطلبات نظامك أو مشاكل الـ backend التي تواجهها. سواء كنت بحاجة إلى موقع ويب كامل أو كان لديك موعد تسليم ضيق، سأقدم لك ما تريده بدقة.",
-        "contact-info-title": "ماذا يحدث بعد ذلك؟",
-        "contact-info-li1": "1. تقييم وتحليل يدوي للمتطلبات خلال 24 ساعة.",
-        "contact-info-li2": "2. تتلقى مخطط تغذية راجعة هيكلي ومباشر عبر البريد الإلكتروني.",
-        "contact-resume": "السيرة الذاتية التقنية",
-        "contact-btn-submit": "إرسال المتطلبات",
-        
-        "footer-copy": "&copy; 2026 Mark Mounir. جميع الحقوق التشغيلية محفوظة.",
-        "footer-status": "حالة النظام: يعمل بشكل طبيعي",
-        
-        // Form specific texts
-        "placeholder-name": "الاسم / اسم الشركة",
-        "placeholder-email": "عنوان البريد الإلكتروني",
-        "placeholder-msg": "صف بإيجاز متطلبات مشروعك أو المشاكل التي تواجه البنية التقنية الحالية...",
-        "select-default": "اختر نوع التعاقد المطلوب",
-        "select-opt1": "بناء البنية المعمارية للنظام الكامل (~4-6 أسابيع)",
-        "select-opt2": "نشر وإعداد البنية التحتية لخوادم VPS المعزولة",
-        "select-opt3": "تحسين قاعدة البيانات وإعادة بناء الكود",
-        "select-opt4": "مهام backend مخصصة أخرى"
-      }
-    };
-    
-    // Theme Switcher Handler
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    updateThemeIcon(currentTheme);
-    
-    $('#themeToggle').on('click', function() {
-      let activeTheme = document.documentElement.getAttribute('data-theme');
-      let targetTheme = activeTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', targetTheme);
-      localStorage.setItem('portfolio-theme', targetTheme);
-      updateThemeIcon(targetTheme);
-    });
-    
-    function updateThemeIcon(theme) {
-      if (theme === 'dark') { $('#themeIcon').removeClass('fa-sun').addClass('fa-moon'); }
-      else { $('#themeIcon').removeClass('fa-moon').addClass('fa-sun'); }
-    }
-    
-    // Language Switcher Handler
-    let currentLang = localStorage.getItem('portfolio-lang') || 'en';
-    applyLanguage(currentLang);
-    
-    $('#langToggle').on('click', function() {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
-      applyLanguage(currentLang);
-    });
-    
-    function applyLanguage(lang) {
-      // Save lang selection
-      localStorage.setItem('portfolio-lang', lang);
-      document.documentElement.setAttribute('lang', lang);
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-      
-      // Update Bootstrap stylesheet link href
-      const bootstrapLink = document.getElementById('bootstrapStyle');
-      if (bootstrapLink) {
-        bootstrapLink.href = lang === 'ar' 
-          ? 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css' 
-          : 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
-      }
-      
-      // Update switcher button label
-      $('#langToggle').text(lang === 'en' ? 'AR' : 'EN');
-      
-      // Update elements with data-i18n attributes
-      $('[data-i18n]').each(function() {
-        const key = $(this).attr('data-i18n');
-        if (i18n[lang][key]) {
-          $(this).html(i18n[lang][key]);
-        }
-      });
-      
-      // Update Form Inputs Placeholders
-      $('#name').attr('placeholder', i18n[lang]["placeholder-name"]);
-      $('#email').attr('placeholder', i18n[lang]["placeholder-email"]);
-      $('#message').attr('placeholder', i18n[lang]["placeholder-msg"]);
-      
-      // Re-populate select options
-      const projectTrackSelect = $('#projectTrack');
-      projectTrackSelect.empty();
-      projectTrackSelect.append($('<option>', {
-        value: "",
-        disabled: true,
-        selected: true,
-        text: i18n[lang]["select-default"]
-      }));
-      projectTrackSelect.append($('<option>', { value: "Full MVP Build", text: i18n[lang]["select-opt1"] }));
-      projectTrackSelect.append($('<option>', { value: "VPS Setup", text: i18n[lang]["select-opt2"] }));
-      projectTrackSelect.append($('<option>', { value: "Query Optimization", text: i18n[lang]["select-opt3"] }));
-      projectTrackSelect.append($('<option>', { value: "Custom Contract", text: i18n[lang]["select-opt4"] }));
-      
-      // Navbar brand adjustments for RTL spacing
-      const brandSquare = $('.brand-square');
-      if (lang === 'ar') {
-        brandSquare.removeClass('me-3').addClass('ms-3');
-      } else {
-        brandSquare.removeClass('ms-3').addClass('me-3');
-      }
-    }
-    
-    // Smooth Hash Navigation Scroll & Active link highlight on scroll
-    $(window).on('scroll', function() {
-      const scrollPos = $(document).scrollTop();
-      $('.navbar-nav a').each(function() {
-        const currLink = $(this);
-        const refElement = $(currLink.attr('href'));
-        if (refElement.position().top - 150 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-          $('.navbar-nav a').removeClass('active');
-          currLink.addClass('active');
-        }
-      });
-    });
+  <!-- System Footer -->
+  <footer class="system-footer">
+    <div class="app-container">
+      <div class="footer-inner">
+        <div>
+          <strong>MARK MOUNIR</strong> — Production Software Engineer & Infrastructure Specialist
+        </div>
+        <div style="display: flex; gap: 1.25rem;">
+          <a href="https://github.com/markmounir" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/markmounir" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a href="#audit" onclick="switchView('audit')"><i class="fa-solid fa-envelope"></i> Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    // Form Submission Handler
-    $('#contactForm').on('submit', function(e) {
-      e.preventDefault();
-      var name = $('#name').val().trim(), email = $('#email').val().trim(), track = $('#projectTrack').val(), msg = $('#message').val().trim();
-      if(!name || !email || !track || !msg) return;
-      var subject = encodeURIComponent('Inquiry: ' + track + ' - ' + name);
-      var body = encodeURIComponent('Origin: ' + name + '\nReply-To: ' + email + '\nSelected Target: ' + track + '\n\nDescription:\n' + msg);
-      window.location.href = 'mailto:markmounirr@gmail.com?subject=' + subject + '&body=' + body;
-    });
-  })();
-</script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

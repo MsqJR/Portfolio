@@ -1,0 +1,54 @@
+:root {
+  /* Base Fonts */
+  --font-mono: 'Cascadia Code', 'Cascadia Mono', monospace;
+  --font-sans: 'Cairo', sans-serif;
+  
+  /* Typographic Scale */
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.95rem;
+  --fs-base: 1.15rem;
+  --fs-lg: 1.45rem;
+  --fs-xl: 1.85rem;
+  --fs-2xl: 2.4rem;
+  --fs-hero: clamp(2.1rem, 4.5vw, 3.4rem);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+[data-theme="dark"] {
+  --bg: #1d2021;
+  --panel: #282828;
+  --panel-inner: #32302f;
+  --panel-header: #3c3836;
+  --text: #ebdbb2;
+  --muted: #a89984;
+  --accent: #fe8019;       /* Gruvbox Orange */
+  --accent-green: #b8bb26; /* Gruvbox Green */
+  --accent-blue: #83a598;  /* Gruvbox Blue */
+  --accent-yellow: #fabd2f;/* Gruvbox Yellow */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(254, 128, 25, 0.4);
+  --badge-bg: rgba(254, 128, 25, 0.15);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --code-bg: #141617;
+}
+
+[data-theme="light"] {
+  --bg: #fbf1c7;
+  --panel: #f2e5bc;
+  --panel-inner: #ebdbb2;
+  --panel-header: #d5c4a1;
+  --text: #282828;
+  --muted: #665c54;
+  --accent: #af3a03;       /* Dark Gruvbox Orange */
+  --accent-green: #79740e; /* Dark Gruvbox Green */
+  --accent-blue: #076678;  /* Dark Gruvbox Blue */
+  --accent-yellow: #b57614;/* Dark Gruvbox Yellow */
+  --border: rgba(40, 40, 40, 0.15);
+  --border-accent: rgba(175, 58, 3, 0.4);
+  --badge-bg: rgba(175, 58, 3, 0.12);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --code-bg: #e5d5ab;
+}
