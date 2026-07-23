@@ -1,4 +1,4 @@
-export const VIEWS = ['home', 'services', 'projects', 'audit'];
+export const VIEWS = ['home', 'experience', 'services', 'projects', 'audit'];
 
 export const THEME_KEY = 'portfolio-theme';
 
@@ -22,10 +22,11 @@ export const ESTIMATOR_CONFIG = {
 
 export const CLI_HELP_TEXT =
   "• overview (or home)  : Navigate to Overview\n" +
+  "• experience (or exp) : Inspect Engineering Experience & Roles\n" +
   "• services            : View Services & Estimator\n" +
   "• projects (or proof) : Inspect Structural Projects\n" +
   "• audit (or contact)  : Book Free Architecture Review\n" +
-  "• experience          : Display credentials & metrics summary\n" +
   "• theme               : Toggle Dark / Light theme\n" +
   "• clear               : Clear terminal screen\n" +
-  "• exit                : close terminal screen";
+  "• exit                : Close terminal screen";
+

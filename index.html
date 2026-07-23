@@ -32,6 +32,7 @@
       <nav>
         <ul class="nav-routes">
           <li><button class="nav-btn active" id="nav-home" onclick="switchView('home')"><i class="fa-solid fa-terminal"></i> Overview</button></li>
+          <li><button class="nav-btn" id="nav-experience" onclick="switchView('experience')" title="Work Experience & Credentials"><i class="fa-solid fa-briefcase"></i> Experience</button></li>
           <li><button class="nav-btn" id="nav-services" onclick="switchView('services')"><i class="fa-solid fa-cubes"></i> Services</button></li>
           <li><button class="nav-btn" id="nav-projects" onclick="switchView('projects')" title="Structural Projects"><i class="fa-solid fa-code-branch"></i> Projects</button></li>
           <li><button class="nav-btn" id="nav-audit" onclick="switchView('audit')" title="Free Architecture Review"><i class="fa-solid fa-shield-halved"></i> Audit</button></li>
@@ -83,6 +84,9 @@
             <button class="btn btn-primary" onclick="switchView('audit')">
               <i class="fa-solid fa-paper-plane"></i> Book Free Architecture Review
             </button>
+            <button class="btn btn-secondary" onclick="switchView('experience')">
+              <i class="fa-solid fa-briefcase"></i> View Work Experience
+            </button>
             <button class="btn btn-secondary" onclick="switchView('projects')">
               <i class="fa-solid fa-code-branch"></i> Review Structural Projects
             </button>
@@ -132,7 +136,206 @@
       </div>
     </section>
 
-    <!-- VIEW 2: SERVICES & ESTIMATOR -->
+    <!-- VIEW 2: WORK EXPERIENCE & CREDENTIALS -->
+    <section id="view-experience" class="view-section">
+      <div class="console-box">
+        <div class="console-header">
+          <div class="console-title"><i class="fa-solid fa-briefcase" style="color: var(--accent);"></i> mark@production-node-01:~# cat work_experience.log</div>
+          <div class="console-controls">
+            <span class="c-dot c-red"></span>
+            <span class="c-dot c-yellow"></span>
+            <span class="c-dot c-green"></span>
+          </div>
+        </div>
+        <div class="console-body">
+          <h2 style="font-family: var(--font-sans); font-size: var(--fs-xl); margin-bottom: 0.5rem;">
+            Professional Engineering Work Experience
+          </h2>
+          <p style="color: var(--muted); max-width: 780px; margin-bottom: 1.5rem;">
+            Hands-on backend engineering, enterprise module architecture (Domain-Driven Design), RESTful API development, multi-tenant authentication, and quality assurance.
+          </p>
+
+          <div class="experience-grid">
+            
+            <!-- EXPERIENCE CARD 1: EVA PHARMA -->
+            <div class="experience-card">
+              <div class="experience-header">
+                <div>
+                  <div class="experience-company">
+                    <i class="fa-solid fa-building" style="color: var(--accent-green);"></i> EVA Pharma
+                  </div>
+                  <div class="experience-role">Backend Developer Intern (EVA AI Hackathon)</div>
+                </div>
+                <span class="experience-date"><i class="fa-regular fa-calendar"></i> Jul. 2026 – Present</span>
+              </div>
+              
+              <div class="service-tags" style="margin-bottom: 1rem;">
+                <span class="tag">.NET Core</span>
+                <span class="tag">Angular</span>
+                <span class="tag">EF Core</span>
+                <span class="tag">Domain-Driven Design (DDD)</span>
+                <span class="tag">Swagger</span>
+                <span class="tag">Postman</span>
+                <span class="tag">Agile</span>
+              </div>
+
+              <ul class="experience-bullets">
+                <li>Architecting an enterprise module end-to-end within a <strong>Domain-Driven Design (DDD)</strong> architecture using <strong>.NET Core</strong> and <strong>Angular</strong>.</li>
+                <li>Designing Domain, Application, and API layers implementing aggregate roots, domain events, and dynamic DTO mappings with <strong>EF Core</strong>.</li>
+                <li>Authoring comprehensive technical solution architecture documents and system specifications under senior engineering mentorship.</li>
+                <li>Collaborating in an Agile setup and validating RESTful APIs via <strong>Swagger/Postman</strong> to ensure robust system integrations.</li>
+              </ul>
+            </div>
+
+            <!-- EXPERIENCE CARD 2: GB CORP -->
+            <div class="experience-card">
+              <div class="experience-header">
+                <div>
+                  <div class="experience-company">
+                    <i class="fa-solid fa-building" style="color: var(--accent-blue);"></i> GB Corp.
+                  </div>
+                  <div class="experience-role">Backend Development Intern</div>
+                </div>
+                <span class="experience-date"><i class="fa-regular fa-calendar"></i> Aug. 2025</span>
+              </div>
+
+              <div class="service-tags" style="margin-bottom: 1rem;">
+                <span class="tag">Django</span>
+                <span class="tag">Python</span>
+                <span class="tag">RESTful APIs</span>
+                <span class="tag">Postman</span>
+                <span class="tag">Multi-Tenant Auth</span>
+              </div>
+
+              <ul class="experience-bullets">
+                <li>Architected and deployed a multi-tenant authentication module using <strong>Django</strong>, centralizing access for 3 internal tools.</li>
+                <li>Engineered <strong>10+ RESTful API endpoints</strong>, crafting Postman validation suites to eliminate regression bugs prior to deployment.</li>
+                <li>Refactored backend components for modularity, accelerating team feature development speed by an estimated <strong>20%</strong>.</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- Education & Formal Certifications Console Box -->
+          <div class="console-box" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+            <div class="console-header">
+              <div class="console-title"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-yellow);"></i> Education & Formal Certifications</div>
+            </div>
+            <div class="console-body" style="padding: 1.25rem;">
+              <div class="shortcuts-grid">
+                <div>
+                  <h4 style="font-family: var(--font-sans); color: var(--accent-green); margin-bottom: 0.75rem; font-size: 1rem;">
+                    <i class="fa-solid fa-university"></i> Formal Education
+                  </h4>
+                  <div style="margin-bottom: 1rem;">
+                    <strong style="font-size: 1.05rem; color: var(--text);">Cairo University</strong><br>
+                    <span style="color: var(--muted);">Faculty of Computers and Artificial Intelligence</span><br>
+                    <span style="color: var(--accent-yellow); font-size: 0.9rem;">B.Sc. in Software Engineering (GPA: 3.05/4.0)</span> <span style="color: var(--muted); font-size: 0.85rem;">— Sep. 2022 – Jul. 2026 | Giza, EG</span>
+                    <p style="color: var(--muted); font-size: 0.88rem; margin-top: 0.4rem;">
+                      <em>Relevant Coursework:</em> Software Architecture, Algorithm Analysis, Database Engineering, Operating Systems, Computer Networks, Distributed Systems, Software Testing.
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 style="font-family: var(--font-sans); color: var(--accent); margin-bottom: 0.75rem; font-size: 1rem;">
+                    <i class="fa-solid fa-certificate"></i> Certifications & Credentials
+                  </h4>
+                  <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                      <i class="fa-solid fa-award" style="color: var(--accent-red); margin-top: 0.2rem;"></i>
+                      <div>
+                        <strong>Red Hat OpenShift Development I</strong><br>
+                        <span style="color: var(--muted); font-size: 0.88rem;">Introduction to Containers with Podman — Dec. 2025</span>
+                      </div>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                      <i class="fa-solid fa-award" style="color: var(--accent-green); margin-top: 0.2rem;"></i>
+                      <div>
+                        <strong>Fullstack .NET Web Developer</strong><br>
+                        <span style="color: var(--muted); font-size: 0.88rem;">Digital Egypt Pioneers Initiative (DEPI - MCIT) — Dec. 2025</span>
+                      </div>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                      <i class="fa-solid fa-award" style="color: var(--accent-blue); margin-top: 0.2rem;"></i>
+                      <div>
+                        <strong>ISTQB Certified Tester Foundation Level (CTFL)</strong><br>
+                        <span style="color: var(--muted); font-size: 0.88rem;">International Software Testing Qualifications Board — Oct. 2025</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Skills Matrix -->
+          <div class="console-box" style="margin-bottom: 0;">
+            <div class="console-header">
+              <div class="console-title"><i class="fa-solid fa-layer-group" style="color: var(--accent-green);"></i> Technical Skills Taxonomy</div>
+            </div>
+            <div class="console-body" style="padding: 1.25rem;">
+              <div class="skills-container">
+                <div class="skill-category">
+                  <div class="skill-category-title"><i class="fa-solid fa-code"></i> Languages</div>
+                  <div class="skill-tags">
+                    <span class="tag">C/C++</span>
+                    <span class="tag">Go (Golang)</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">TypeScript</span>
+                  </div>
+                </div>
+
+                <div class="skill-category">
+                  <div class="skill-category-title"><i class="fa-solid fa-cubes"></i> Frameworks & Architecture</div>
+                  <div class="skill-tags">
+                    <span class="tag">.NET Core</span>
+                    <span class="tag">Angular</span>
+                    <span class="tag">Django</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">Spring Boot</span>
+                    <span class="tag">Django REST Framework</span>
+                    <span class="tag">RabbitMQ</span>
+                    <span class="tag">Domain-Driven Design (DDD)</span>
+                  </div>
+                </div>
+
+                <div class="skill-category">
+                  <div class="skill-category-title"><i class="fa-solid fa-wrench"></i> Tools & Infrastructure</div>
+                  <div class="skill-tags">
+                    <span class="tag">Docker</span>
+                    <span class="tag">Podman</span>
+                    <span class="tag">Git</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Postman</span>
+                    <span class="tag">Vim</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">Nginx</span>
+                  </div>
+                </div>
+
+                <div class="skill-category">
+                  <div class="skill-category-title"><i class="fa-solid fa-database"></i> Databases</div>
+                  <div class="skill-tags">
+                    <span class="tag">SQL Server</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">MySQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: SERVICES & ESTIMATOR -->
     <section id="view-services" class="view-section">
       <div class="console-box">
         <div class="console-header">
@@ -361,32 +564,21 @@
 
           </div>
 
-          <!-- Credentials Table -->
+          <!-- Cross-Link to Experience Section -->
           <div class="console-box" style="margin-top: 2rem; margin-bottom: 0;">
             <div class="console-header">
-              <div class="console-title"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-yellow);"></i> Degrees & Formal Certifications</div>
+              <div class="console-title"><i class="fa-solid fa-briefcase" style="color: var(--accent-green);"></i> Work Experience & Engineering Credentials</div>
             </div>
-            <div class="console-body" style="padding: 1rem;">
-              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
-                <li style="display: flex; gap: 0.75rem; align-items: center;">
-                  <i class="fa-solid fa-award" style="color: var(--accent-green);"></i>
-                  <div>
-                    <strong>B.Sc. in Software Engineering</strong> — Cairo University (FCAI)
-                  </div>
-                </li>
-                <li style="display: flex; gap: 0.75rem; align-items: center;">
-                  <i class="fa-solid fa-certificate" style="color: var(--accent);"></i>
-                  <div>
-                    <strong>ISTQB Certified Tester (CTFL)</strong> — International Software Testing Qualifications Board
-                  </div>
-                </li>
-                <li style="display: flex; gap: 0.75rem; align-items: center;">
-                  <i class="fa-solid fa-building" style="color: var(--accent-blue);"></i>
-                  <div>
-                    <strong>Backend Developer Intern</strong> — GB Corp (Internal Service Pipelines & Query Refactoring)
-                  </div>
-                </li>
-              </ul>
+            <div class="console-body" style="padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+              <div>
+                <strong style="color: var(--text); font-size: 1.05rem;">Interested in formal engineering roles & company history?</strong>
+                <p style="color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem;">
+                  Explore full work experience details for EVA Pharma, GB Corp., education, certs, and skill taxonomy.
+                </p>
+              </div>
+              <button class="btn btn-secondary" onclick="switchView('experience')">
+                <i class="fa-solid fa-arrow-right"></i> View Full Experience
+              </button>
             </div>
           </div>
 
@@ -464,7 +656,7 @@
         <div class="cli-line"><span style="color: var(--accent);">services</span>            - View Services & Interactive Estimator</div>
         <div class="cli-line"><span style="color: var(--accent);">projects</span> (or proof)  - Inspect Structural Projects & Repos</div>
         <div class="cli-line"><span style="color: var(--accent);">audit</span> (or contact)   - Book Free Architecture Review</div>
-        <div class="cli-line"><span style="color: var(--accent);">experience</span>          - Display credentials & metrics summary</div>
+        <div class="cli-line"><span style="color: var(--accent);">experience</span> (or exp)    - Inspect Work Experience, Roles & Stack</div>
         <div class="cli-line"><span style="color: var(--accent);">theme</span>               - Toggle Dark / Light theme</div>
         <div class="cli-line"><span style="color: var(--accent);">clear</span>               - Clear terminal screen</div>
         <div class="cli-line"><span style="color: var(--accent);">exit</span>               - exit terminal screen</div>
@@ -495,16 +687,20 @@
               <div class="shortcut-keys"><kbd>1</kbd> or <kbd>g</kbd> <kbd>h</kbd></div>
             </div>
             <div class="shortcut-row">
+              <span class="shortcut-label">Work Experience</span>
+              <div class="shortcut-keys"><kbd>2</kbd> or <kbd>g</kbd> <kbd>e</kbd></div>
+            </div>
+            <div class="shortcut-row">
               <span class="shortcut-label">Services & Estimator</span>
-              <div class="shortcut-keys"><kbd>2</kbd> or <kbd>g</kbd> <kbd>s</kbd></div>
+              <div class="shortcut-keys"><kbd>3</kbd> or <kbd>g</kbd> <kbd>s</kbd></div>
             </div>
             <div class="shortcut-row">
               <span class="shortcut-label">Structural Projects</span>
-              <div class="shortcut-keys"><kbd>3</kbd> or <kbd>g</kbd> <kbd>p</kbd></div>
+              <div class="shortcut-keys"><kbd>4</kbd> or <kbd>g</kbd> <kbd>p</kbd></div>
             </div>
             <div class="shortcut-row">
               <span class="shortcut-label">Free Audit / Contact</span>
-              <div class="shortcut-keys"><kbd>4</kbd> or <kbd>g</kbd> <kbd>a</kbd></div>
+              <div class="shortcut-keys"><kbd>5</kbd> or <kbd>g</kbd> <kbd>a</kbd></div>
             </div>
           </div>
 

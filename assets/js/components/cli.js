@@ -50,7 +50,14 @@ export function handleCliInput(e) {
         resText = "Switched visual theme.";
         break;
       case 'experience':
-        resText = "3+ Years Software Engineering Experience | 15+ Completed Projects | ISTQB CTFL Certified";
+      case 'exp':
+        switchView('experience');
+        resText = "Navigated to Engineering Experience view.\n" +
+                  "• EVA Pharma — Backend Developer Intern (EVA AI Hackathon) [Jul. 2026 – Present]\n" +
+                  "  .NET Core, Angular, EF Core, Domain-Driven Design (DDD), Swagger/Postman\n" +
+                  "• GB Corp. — Backend Development Intern [Aug. 2025]\n" +
+                  "  Django, RESTful APIs, Postman, Multi-tenant authentication";
+        toggleCliModal();
         break;
       case 'clear':
         output.innerHTML = "";

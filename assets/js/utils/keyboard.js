@@ -44,13 +44,14 @@ export function initKeyboardShortcuts() {
       return;
     }
 
-    // Numeric direct navigation keys (1: Home, 2: Services, 3: Projects, 4: Audit)
+    // Numeric direct navigation keys (1: Home, 2: Experience, 3: Services, 4: Projects, 5: Audit)
     if (e.key === '1') { switchView('home'); return; }
-    if (e.key === '2') { switchView('services'); return; }
-    if (e.key === '3') { switchView('projects'); return; }
-    if (e.key === '4') { switchView('audit'); return; }
+    if (e.key === '2') { switchView('experience'); return; }
+    if (e.key === '3') { switchView('services'); return; }
+    if (e.key === '4') { switchView('projects'); return; }
+    if (e.key === '5') { switchView('audit'); return; }
 
-    // GitHub/Gmail style two-key sequence: 'g' followed by 'h', 's', 'p', or 'a'
+    // GitHub/Gmail style two-key sequence: 'g' followed by 'h', 'e', 's', 'p', or 'a'
     if (e.key.toLowerCase() === 'g') {
       gKeyPressed = true;
       clearTimeout(gKeyTimeout);
@@ -64,6 +65,7 @@ export function initKeyboardShortcuts() {
       clearTimeout(gKeyTimeout);
 
       if (k === 'h') { switchView('home'); }
+      else if (k === 'e') { switchView('experience'); }
       else if (k === 's') { switchView('services'); }
       else if (k === 'p') { switchView('projects'); }
       else if (k === 'a') { switchView('audit'); }
